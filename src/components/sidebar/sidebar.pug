@@ -1,0 +1,15 @@
+div.sidebar
+    ul.sidebar__menu
+        li(class= 'sidebar__menu-item' + ('Чат' === title ? ' active' : ''))
+            a(href='/chat')
+                svg(class= 'sidebar__menu-item-icon' + ('Чат' === title ? ' active' : ''))
+                    use(xlink:href='../../../static/comments.svg#comments')
+        li(class= 'sidebar__menu-item' + ('Профиль' === title ? ' active' : ''))
+            a(href='./profile')
+                svg(class= 'sidebar__menu-item-icon' + ('Профиль' === title ? ' active' : ''))
+                    use(xlink:href='../../../static/user.svg#user')
+    div.sidebar__logo
+        a(href='/500')
+            span #{logo}
+
+script(type='module' src='../../components/sidebar/index.js')

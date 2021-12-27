@@ -1,0 +1,37 @@
+.header {
+    height: 10vh;
+    width: calc(100vw - 14rem);
+    display: flex;
+    flex-direction: row;
+    padding: 3rem 3rem;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2196F3;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.header__title {
+    font-size: 3.6rem;
+    font-weight: 600
+}
+
+.header__user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__user-name {
+    color: #000000;
+    font-size: 2.4rem;
+    font-weight: lighter
+}
+
+.header__user-avatar {
+    width: 5rem;
+    height: 5rem;
+    fill: #cccccc;
+    margin-right: 2rem;
+}

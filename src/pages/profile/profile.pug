@@ -1,0 +1,35 @@
+extends ../../layout/main/main.pug
+
+block variables
+    - let title = 'Профиль'
+
+block content
+    div.profile
+        div.profile__block
+            div.profile__block-info
+                div(id='avatar')
+                    img.profile__block-avatar(src='../../../static/user-circle.svg')
+                div.profile__block-title
+                    span=display_name
+                each val in info
+                    div.profile__block-item
+                        span.profile__block-item-title= val.name + ': '
+                        span= val.value 
+            div.profile__block-buttons
+                button.profile__block-button
+                    span  Изменить данные
+                button.profile__block-button
+                    span  Изменить пароль
+        button.profile__block-button.__logout(id='logout')
+            span  Выйти
+    div.profile__modal
+        span.profile__modal-title Аватар
+        button.profile__block-button.__invert
+            span  Выбрать файл
+        button.profile__block-button(id='save')
+            span  Сохранить
+        input(id='file-input' type='file' name='name' style='display: none;')
+
+block scripts
+    script(type='module' src='./index.js')
+    script(type='module' src='./profile.js')

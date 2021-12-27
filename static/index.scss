@@ -1,0 +1,12 @@
+html {
+    font-size: min(10px, calc(100vw / 75))
+}
+
+body {
+    font-family: Montserrat;
+    margin: 0;
+}
+
+input[type="text"] {
+    font-size: 1.6rem;
+}

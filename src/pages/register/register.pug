@@ -1,0 +1,38 @@
+extends ../../layout/simple/simple.pug
+
+block variables
+    - const title = 'МЕДИАТОР'
+    - const text = 'Регистрация'
+
+block content
+    form
+        div.register__form
+            span.register__form-title Имя
+            input.register__form-input(placeholder="..." type="text" id="first_name") 
+        div.register__form
+            span.register__form-title Фамилия
+            input.register__form-input(placeholder="..." type="text" id="second_name") 
+        div.register__form
+            span.register__form-title Логин
+            input.register__form-input(placeholder="..." type="text" id="login") 
+        div.register__form
+            span.register__form-title Почта
+            input.register__form-input(placeholder="..." type="text" id="email") 
+        div.register__form
+            span.register__form-title Телефон
+            input.register__form-input(placeholder="..." type="text" id="phone") 
+        div.register__form
+            span.register__form-title Пароль
+            input.register__form-input(placeholder="..." type="text" id="password")
+        div.register__form
+            span.register__form-title Пароль еще раз
+            input.register__form-input(placeholder="..." type="text" id="password2")
+        button.register__button(onclick="window.location.href = '/chat'")
+            span.register__button-title  Зарегистрироваться
+
+block buttons
+    button.register__button.__invert(onclick="window.location.href = '/'")
+        span.register__button-title  Войти
+
+block scripts 
+    script(type='module' src="./index.js")

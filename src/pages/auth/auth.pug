@@ -1,0 +1,24 @@
+extends ../../layout/simple/simple.pug
+
+block variables
+    - const title = 'МЕДИАТОР'
+    - const text = 'WEB-Мессенджер'
+
+block content
+    form
+        div.auth__form
+            span.auth__form-title Логин
+            input.auth__form-input(placeholder='...' type='text' id='login') 
+        div.auth__form
+            span.auth__form-title Пароль
+            input.auth__form-input(placeholder='...' type='text' id='password')
+        
+
+block buttons
+    button.auth__button(onclick="window.location.href = '/chat'")
+            span.auth__button-title  Войти
+    button.auth__button.__invert(onclick="window.location.href = '/register'")
+        span.auth__button-title  Зарегистрироваться
+
+block scripts
+    script(type='module' src='./index.js')

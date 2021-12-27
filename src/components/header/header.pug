@@ -1,0 +1,9 @@
+div.header
+    span.header__title #{title}
+    if title != 'Профиль'
+        a(href='/profile')
+            div.header__user
+                img.header__user-avatar(src='../../../static/user-circle.svg')
+                span.header__user-name #{display_name}
+
+script(type='module' src='../../components/header/index.js')

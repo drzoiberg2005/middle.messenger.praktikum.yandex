@@ -1,0 +1,13 @@
+extends ../../layout/simple/simple.pug
+
+block variables
+    - const title = '500'
+    - const text = 'МЕДИАТОР'
+
+block content 
+    span.text ПРОИЗОШЛА ОШИБКА,
+    span.text УЖЕ ИСПРАВЛЯЕМ
+
+block buttons
+    button.simple__page-button-return(onclick="window.location.href = '/'")
+        span На главную 

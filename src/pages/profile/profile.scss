@@ -1,0 +1,97 @@
+.profile {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.profile__block {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile__block-avatar {
+    width: 20rem;
+    height: 20rem;
+}
+
+.profile__block-info {
+    width: 35rem;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.profile__block-title {
+    font-size: 3.6rem;
+    font-weight: 600;
+}
+
+.profile__block-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.8rem;
+    margin-top: 10px;
+}
+
+.profile__block-item-title {
+    font-weight: 600;
+}
+
+.profile__block-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 4rem;
+}
+
+.profile__block-button {
+    display: flex;
+    background: #2196F3;
+    border-radius: 10px;
+    color: #ffffff;
+    min-width: 17rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    border: none;
+    font-size: 1.5rem;
+    padding: 2rem;
+    cursor: pointer;
+
+    &.__logout {
+        background: #FF1744;
+        color: #ffffff;
+        width: 25rem;
+    }
+
+    &.__invert {
+        border: 1px solid #2196F3;
+        background: #ffffff;
+        color: #2196F3;
+    }
+}
+
+
+.profile__modal {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #E3F2FD;
+    border-radius: 10px;
+    border: 1px solid #2196F3;
+    padding: 5rem;
+}
+
+.profile__modal-title {
+    font-size: 2.4rem;
+}
