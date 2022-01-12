@@ -21,11 +21,17 @@
     padding: 0.5rem 3rem;
     box-sizing: border-box;
     margin-top: 4rem;
+    border: none;
+    background: none;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    transition: all 0.5s ease-in;
+    box-sizing: border-box;
 
     &.active {
         border-left: 3px solid #2196F3;
-        background: linear-gradient(270deg, rgba(51, 104, 167, 0.72) 15.71%, rgba(152, 192, 239, 0) 92.49%);
-        border-radius: 0 20px 20px 0;
+        background: #2196F330;
+        transition: all 0.5s ease-in
     }
 }
 
@@ -42,10 +48,5 @@
 .sidebar__logo {
     color: #cccccc !important;
     font-size: 1.8rem;
-}
-
-a:-webkit-any-link {
-    color:#cccccc;
-    text-decoration: none;
     cursor: pointer;
 }

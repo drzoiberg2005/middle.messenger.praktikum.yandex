@@ -1,4 +1,4 @@
-# __Mediator__
+# __МЕДИАТОР__
 
 ---
 
@@ -10,14 +10,31 @@ ___
 
 ##### Данное приложение создано в рамках курса Мидл фронтенд-разработчик на платформе Яндекс.Практикум. 
 
-####  [Открыть прототип приложения в Figma](https://www.figma.com/file/JE3kmIW3amunmzogk12O5i/MediatorChat "https://www.figma.com/file/JE3kmIW3amunmzogk12O5i/MediatorChat")
+####  Открыть прототип приложения в [Figma](https://www.figma.com/file/JE3kmIW3amunmzogk12O5i/MediatorChat "https://www.figma.com/file/JE3kmIW3amunmzogk12O5i/MediatorChat")
 
 ___
 
 ## Команды
 
+#### Сборка и запуск проекта
+
+```
+npm run start
+```
+
 #### Запуск в режиме разработки
 
 ```
 npm run dev
+```
+#### Запуск сервера
+
+```
+npm run server
+```
+
+#### Сборка проекта
+
+```
+npm run build
 ```

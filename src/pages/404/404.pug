@@ -1,13 +1,5 @@
-extends ../../layout/simple/simple.pug
-
-block variables
-    - const title = '404'
-    - const text = 'МЕДИАТОР'
-
-block content 
-    span.text ЧТО-ТО ПОШЛО НЕ ТАК,
-    span.text СТРАНИЦА НЕ НАЙДЕНА
-
-block buttons
-    button.simple__page-button-return(onclick="window.location.href = '/'")
-        span На главную 
+div.simple__page-content-item.__border
+    span.simple__page-content-item-subtitle ЧТО-ТО ПОШЛО НЕ ТАК
+    span.simple__page-content-item-subtitle СТРАНИЦА НЕ НАЙДЕНА
+div.simple__page-content-item
+    button.simple__page-button-return(data-link='/') На главную

@@ -1,10 +1,4 @@
-extends ../../layout/simple/simple.pug
-
-block variables
-    - const title = 'МЕДИАТОР'
-    - const text = 'Регистрация'
-
-block content
+div.simple__page-content-item.__border
     form
         div.register__form
             span.register__form-title Имя
@@ -27,12 +21,7 @@ block content
         div.register__form
             span.register__form-title Пароль еще раз
             input.register__form-input(placeholder="..." type="text" id="password2")
-        button.register__button(onclick="window.location.href = '/chat'")
-            span.register__button-title  Зарегистрироваться
+        button.register__button(data-link='/chats') Зарегистрироваться
 
-block buttons
-    button.register__button.__invert(onclick="window.location.href = '/'")
-        span.register__button-title  Войти
-
-block scripts 
-    script(type='module' src="./index.js")
+div.simple__page-content-item
+    button.register__button.__invert(data-link='/') Войти

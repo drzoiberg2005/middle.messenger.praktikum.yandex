@@ -2,28 +2,44 @@
     width: 100%;
     height: 90vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 0.5rem;
+    padding: 1rem;
     overflow-y: auto;
     box-sizing: border-box;
+    animation: show 1s;
+
+    @media only screen and (min-width: 1024px) {
+        flex-direction: row;
+    }
+
+    @keyframes show {
+
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
 }
 
-.profile__block {
-    display: flex;
-    flex-direction: row;
-}
 
 .profile__block-avatar {
-    width: 20rem;
-    height: 20rem;
+    margin-bottom: 3rem;
+    @media only screen and (min-width: 1024px) {
+        margin-right: 3rem;
+    }
 }
 
 .profile__block-info {
-    width: 35rem;
-    height: 100%;
-    box-sizing: border-box;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 .profile__block-title {
@@ -39,6 +55,13 @@
     margin-top: 10px;
 }
 
+.profile__block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .profile__block-item-title {
     font-weight: 600;
 }
@@ -46,8 +69,10 @@
 .profile__block-buttons {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-left: 4rem;
+    
+    @media only screen and (min-width: 1024px) {
+        margin-left: 4rem;
+    }
 }
 
 .profile__block-button {
@@ -55,7 +80,7 @@
     background: #2196F3;
     border-radius: 10px;
     color: #ffffff;
-    min-width: 17rem;
+    width: 25rem;
     justify-content: center;
     align-items: center;
     margin-top: 4rem;
@@ -64,24 +89,23 @@
     padding: 2rem;
     cursor: pointer;
 
-    &.__logout {
+    &.__cancel {
         background: #FF1744;
         color: #ffffff;
-        width: 25rem;
     }
+}
 
-    &.__invert {
-        border: 1px solid #2196F3;
-        background: #ffffff;
-        color: #2196F3;
-    }
+.profile__input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 
 .profile__modal {
     position: absolute;
-    top: 50vh;
-    left: 50vw;
+    top: 30vh;
+    left: 40vw;
     display: none;
     flex-direction: column;
     align-items: center;
@@ -90,7 +114,11 @@
     border-radius: 10px;
     border: 1px solid #2196F3;
     padding: 5rem;
+    &.__visible {
+        display: flex;
+    }
 }
+
 
 .profile__modal-title {
     font-size: 2.4rem;
