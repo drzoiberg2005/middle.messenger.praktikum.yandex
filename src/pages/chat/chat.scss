@@ -1,0 +1,222 @@
+.chat {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    animation: show 1s;
+
+    @keyframes show {
+
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+.dialogs {
+    width: 35vw;
+    border-right: 1px solid #2196F3;
+    background: #E3F2FD;
+    box-sizing: border-box;
+}
+
+.find {
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #2196F3;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.find__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    fill: #2196F3;
+    margin-right: 1rem;
+}
+
+.find__input {
+    width: 80%;
+    border: 1px solid #2196F3;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+}
+
+.list {
+    height: calc(90vh - 8rem);
+    overflow-y: auto;
+    box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list__item {
+    width: 100%;
+    height: 8rem;
+    border-bottom: 1px solid #2196F3;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+
+    &.active {
+        border-left: 1rem solid #2196F3;
+        background: #ffffff;
+    }
+}
+
+
+.list__item-left-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.list__item-left-avatar {
+    width: 40%;
+    height: 5rem;
+    fill: #cccccc;
+    margin-right: 2rem;
+}
+
+.list__item-left {
+    width: 20vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list__item-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.list__item-left-text-contact {
+    font-size: 2.4rem;
+    font-weight: 300
+}
+
+.list__item-left-text-message {
+    width: 15vw;
+    margin-top: 0.5rem;
+    font-size: 1.8rem;
+    font-weight: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list__item-right-time {
+    font-size: 1.4rem;
+    font-weight: 300
+}
+
+.list__item-right-counter {
+    margin-top: 1rem;
+    color: #ffffff;
+    background-color: #2196F3;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding-top: 0.2rem;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.dialog {
+    width: 60%;
+    box-sizing: border-box;
+}
+
+.messages {
+    margin: 0;
+    padding: 2rem;
+    height: 80vh;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    overflow-y: auto;
+    box-sizing: border-box;
+    list-style: none
+}
+
+.messages__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    &.__send {
+        justify-content: flex-end;
+    }
+}
+
+.messages__item-block {
+    background: #00000010;
+    padding: 1rem;
+    max-width: 60%;
+    margin: 1rem 0;
+    border-radius: 0 10px 10px 0;
+    border-left: 0.5rem solid #69F0AE;
+    box-sizing: border-box;
+
+    &.__send {
+        border-radius: 10px 0 0 10px;
+        border-left: none;
+        border-right: 0.5rem solid #2196F3;
+    }
+}
+
+.message__item-text {
+    font-size: 1.6rem;
+}
+
+.shipment {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-top: 1px solid #2196F3;
+}
+
+.shipment__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    fill: #2196F3;
+}
+
+.shipment__input {
+    width: 60%;
+    border: 1px solid #2196F3;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin: 0 1rem;
+}
+
+.warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    height: 100%;
+}

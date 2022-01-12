@@ -1,0 +1,43 @@
+-
+    const inputs = [
+        {
+            title : 'Имя',
+            name: 'first_name',
+            type: 'text',
+            value: user
+        },
+        {
+            title : 'Фамилия',
+            name: 'second_name',
+            type: 'text'
+        },
+        {
+            title : 'Имя в чате',
+            name: 'display_name',
+            type: 'text'
+        },
+        {
+            title : 'Логин',
+            name: 'login',
+            type: 'text'
+        },
+        {
+            title : 'E-mail',
+            name: 'email',
+            type: 'email'
+        },
+        {
+            title : 'Телефон',
+            name: 'phone',
+            type: 'tel'
+        }
+    ]
+div.profile
+    form
+        ul.profile__block-info
+            each value in inputs
+                li.profile__block-item
+                    span(style='margin-right: 10px')=value.title
+                    input.register__form-input(type=value.type name=value.name value=value.value)
+        button.profile__block-button(type='submit')#saveinfo Сохранить
+        button.profile__block-button.__cancel#cancelinfo Отменить
