@@ -2,10 +2,10 @@ export const generateavatar = (object, size = 10, user = true, color = '#ffffff'
     const text = (user ? object.first_name[0] + object.second_name[0] : object.title[0]).toUpperCase()
 
     const content = () => {
-        if (object.avatar) {
+        if (!object.avatar && object.avatar !== null) { // Delete "!" as I find out how to get an avatar
             const image = document.createElement('img')
-            image.setAttribute('src', object.avatar)
-            image.style.borderRadius = '50%'
+            image.setAttribute('src', 'https://avatars.mds.yandex.net' + object.avatar)
+            image.style.objectFit = 'cover'
             return image
         } else {
             const canvas = document.createElement('canvas')
@@ -16,7 +16,7 @@ export const generateavatar = (object, size = 10, user = true, color = '#ffffff'
             context.fillStyle = background
             context.fillRect(0, 0, canvas.width, canvas.height)
 
-            context.font = `${size/2}rem Montserrat-regular`
+            context.font = `${size/2.5}rem Montserrat-regular`
             context.fillStyle = color
             context.textAlign = 'center'
             context.textBaseline = 'middle'

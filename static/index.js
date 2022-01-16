@@ -1,3 +1,4 @@
+import { requestUser } from '../src/utils/requestuser'
 import './fonts.scss'
 import './index.scss'
 import {
@@ -5,13 +6,10 @@ import {
     router
 } from './router'
 
-const lasturl = localStorage.getItem('lasturl')
-// if (lasturl) {
-//     navigateTo(lasturl)
-// }
 window.addEventListener('popstate', router)
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await requestUser()
     document.body.addEventListener('click', (e) => {
         if (e.target.matches('[data-link]')) {
             e.preventDefault()

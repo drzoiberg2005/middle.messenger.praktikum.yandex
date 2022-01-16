@@ -3,7 +3,8 @@ export const sorting = (array, path, increase = true) => {
         const properties = Array.isArray(path) ? path : path.split(separator)
         return properties.reduce((prev, curr) => prev && prev[curr], obj)
     }
-    const sortArray = array.sort(function (a, b) {
+    const copyArray = array.slice()
+    const sortArray = copyArray.sort(function (a, b) {
         if (resolve(path, a) > resolve(path, b)) {
             return increase ? -1 : 1;
         }

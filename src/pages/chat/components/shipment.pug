@@ -1,6 +1,7 @@
-div.shipment
-    svg.shipment__icon
+form.shipment
+    svg.icon#addfile
         use(xlink:href='../../../../static/paperclip.svg#paperclip')
-    input.shipment__input(type='text' placeholder='Сообщение')
-    svg.shipment__icon
-        use(xlink:href='../../../../static/message.svg#message')
+    input.shipment__input(type='text' name='message' placeholder='Сообщение')
+    button(type='submit')
+        svg.icon
+            use(xlink:href='../../../../static/message.svg#message')

@@ -1,29 +1,40 @@
-import { navigateTo } from "../../static/router"
+import {
+    navigateTo
+} from "../../static/router"
 
-export default useHttp = async (url, method = 'GET', body = null, headers = {}) => {
-    try {
+const fetch = async (url, method = 'GET', body = null, headers) => {
+    const response = new Promise(function (resolve, reject) {
+        const http = new XMLHttpRequest()
+        const fullUrl = `https://ya-praktikum.tech/api/v2${url}`
+        http.open(method, fullUrl, true)
+        http.setRequestHeader('accept', 'application/json')
         if (body) {
-            body = JSON.stringify(body)
-            headers['accept'] = 'application/json'
-            headers['Content-Type'] = 'application/json'
-
+            http.setRequestHeader('Content-Type', 'application/json')
         }
-        const response = await fetch(`https://ya-praktikum.tech/api/v2${url}`, {
-            method,
-            body,
-            headers
-        })
-        const data = await response.json()
-
-        if (!response.ok) {
-            throw new Error(data.message || 'Что-то пошло не так')
+        for (let key in headers) {
+            http.setRequestHeader(key, headers[key])
         }
+        http.withCredentials = true
+        http.responseType = 'json'
+        http.onload = function () {
+            if (http.readyState === 4) {
+                resolve({
+                    status: http.status,
+                    response: http.response
+                })
+            }
+        }
+        http.send(JSON.stringify(body))
+    })
+    return response
+}
 
+export const useHttp = async (url, method, body, headers) => {
+    try {
+        const data = await fetch(url, method, body, headers)
         return data
-    } catch (e) {
+    } catch (error) {
         navigateTo('/500')
-        console.log(e.message)
-        throw e
+        console.log(error)
     }
-
 }

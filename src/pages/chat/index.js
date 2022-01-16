@@ -2,106 +2,88 @@ import './chat.scss'
 import Layout from '../../layout/index.js'
 import content from 'bundle-text:./chat.pug'
 import listTmpl from 'bundle-text:./components/list.pug'
-import messagesTmpl from 'bundle-text:./components/messages.pug'
-import shipmentTmpl from 'bundle-text:./components/shipment.pug'
 import pug from 'pug'
-import {
-    dialogs,
-    messages,
-    user
-} from '../../../static/consts'
-import {
-    sorting
-} from '../../utils/sorting'
 import {
     generateavatar
 } from '../../utils/generateavatar'
+import {
+    addClass,
+    removeClass,
+    sorting
+} from '../../utils/helpers'
+import {
+    logotype
+} from '../../constants/logotype'
+import {
+    useHttp
+} from '../../utils/http'
+import {
+    navigateTo
+} from '../../../static/router'
 
 export default class extends Layout {
     constructor(params) {
         super(params)
-        if (!document.querySelector('.chat')) {
-            user.display_name = 'Андрей'
-            this.setTitle('Чат')
-            this.postId = params.id;
-            console.log(this.postId)
-            this.updateLayout('main')
-            this.renderContent(content)
-            this.container.querySelector('#button-chat').classList.add('active')
-            this.container.querySelector('#button-profile').classList.remove('active')
-            this.container.querySelector('.header__title').innerText = 'Чат'
-            renderDialogs(dialogs, params)
-            renderMessages(messages, params)
-            window.addEventListener('locationchange', () => {
-                renderMessages(messages, params)
-                if (params.id) {
-                    this.container.querySelectorAll('.list__item').forEach(element => element.classList.remove('active'))
-                    this.container.querySelector(`[id='${params.id}']`).classList.add('active')
-                }
-            })
+        this.params = params
+        this.setTitle(`${logotype} - Чат`)
+        this.updateLayout('main')
+        this.renderContent(content)
+        addClass(this.container.querySelector('#button-chat'), '__active')
+        removeClass(this.container.querySelector('#button-profile'), '__active')
+        this.container.querySelector('.header__title').innerText = 'Чат'
+        this.getDialogs()
+        if (!params.id) {
+            this.message = document.createElement('span')
+            addClass(this.message, 'warning')
+            this.message.innerText = 'Выберите чат'
+            this.container.querySelector('.messages')?.append(this.message)
         }
-        this.input = this.container.querySelector('#finder')
-        this.input.addEventListener('input', (e) => {
-            document.body.querySelector('.list').innerHTML = ''
-            renderDialogs(dialogs.filter(element => element.title.indexOf(e.target.value) !== -1))
+        this.finder = this.container.querySelector('#finder')
+        this.finder?.addEventListener('input', (e) => {
+            console.log("finder")
+            this.getDialogs(e.target.value)
+        })
+        newchat.addEventListener('click', (e) => {
+            e.preventDefault()
+            alert('New Chat')
         })
     }
-    async getHtml() {
-        return ''
-    }
-}
 
-export const renderDialogs = (dialogs) => {
-    if (dialogs.length > 0) {
-        const arr = sorting(dialogs, 'last_message.time', true)
-        arr.forEach(dialog => {
-            const block = document.createElement('li')
-            document.body.querySelector('.list').append(block)
-            block.innerHTML = pug.render(listTmpl)
-            block.querySelector('.list__item-left-avatar').append(generateavatar(dialog, 4, false))
-            block.querySelector('.list__item').setAttribute('id', dialog.id)
-            block.querySelector('.list__item').setAttribute('data-link', '/chats/' + dialog.id)
-            block.querySelector('.list__item-left-text-contact').innerText = dialog.title
-            block.querySelector('.list__item-left-text-message').innerText = dialog.last_message.content
-            block.querySelector('.list__item-right-time').innerText = dialog.last_message.time.split('T')[1].split(':')[0] + ':' + dialog.last_message.time.split('T')[1].split(':')[1]
-            block.querySelector('.list__item-right-counter').innerText = dialog.unread_count
-        })
-    } else {
-        const block = document.createElement('span')
-        block.classList.add('warning')
-        document.body.querySelector('.list').append(block)
-        block.innerText = 'Чаты не найдены'
+    getDialogs = async (finder) => {
+        const dialogs = (await useHttp(`/chats${finder ? '?title='+ finder : ''}`)).response
+        this.renderDialogs(dialogs)
     }
 
-}
-
-export const renderMessages = (messages, params) => {
-    if (!params.id) {
-        const block = document.createElement('span')
-        block.classList.add('warning')
-        document.body.querySelector('.messages').append(block)
-        block.innerText = 'Выберите чат'
-    } else if (messages.length > 0 && params.id) {
-        const arr = sorting(messages, 'message', true)
-        arr.forEach(message => {
-            const block = document.createElement('li')
-            document.body.querySelector('.messages').append(block)
-            block.innerHTML = pug.render(messagesTmpl)
-            if (message.in) {
-                block.querySelector('.messages__item').classList.add('__send')
-                block.querySelector('.messages__item-block').classList.add('__send')
-            }
-            block.querySelector('.message__item-text').innerText = message.message
-        })
-        const input = document.createElement('div')
-        input.innerHTML = pug.render(shipmentTmpl)
-        document.querySelector('.dialog').append(input)
-    } else {
-        const block = document.createElement('span')
-        block.classList.add('warning')
-        document.body.querySelector('.messages').append(block)
-        block.innerText = 'Сообщений нет'
+    renderDialogs = async (dialogs) => {
+        this.container.querySelector('.list').innerHTML = ''
+        sorting(dialogs, 'last_message.time', true)
+        if (dialogs.length > 0) {
+            dialogs.forEach(dialog => {
+                this.li = document.createElement('li')
+                addClass(this.li, 'list__item')
+                if (this.params.id == dialog.id) {
+                    addClass(this.li, '__active')
+                }
+                this.container.querySelector('.list')?.append(this.li)
+                this.li.innerHTML = pug.render(listTmpl)
+                this.li.querySelector('.list__item-left-avatar')?.append(generateavatar(dialog, 4, false))
+                this.li.querySelector('.list__item-left-text-contact').innerText = dialog.title
+                this.li.querySelector('.list__item-left-text-message').innerText = dialog.last_message ? dialog.last_message.content : ''
+                this.li.querySelector('.list__item-right-time').innerText = dialog.last_message ? dialog.last_message.time.split('T')[1].split(':')[0] + ':' + dialog.last_message.time.split('T')[1].split(':')[1] : ''
+                if (dialog.unread_count > 0) {
+                    this.li.querySelector('.list__item-right-counter').innerText = dialog.unread_count
+                } else {
+                    removeClass(this.li.querySelector('.list__item-right-counter'), 'list__item-right-counter')
+                }
+                this.li.addEventListener('click', () => {
+                    navigateTo(`/chats/${dialog.id}`)
+                })
+            })
+        } else {
+            this.warning = document.createElement('span')
+            addClass(this.warning, 'warning')
+            this.warning.innerText = 'Чаты не найдены'
+            this.container.querySelector('.list')?.append(this.warning)
+        }
     }
-
-
 }

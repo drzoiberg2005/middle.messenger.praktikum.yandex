@@ -1,56 +1,44 @@
+@import '../../../static/variables';
+
 .chat {
     width: 100%;
     height: 90vh;
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
-    animation: show 1s;
 
-    @keyframes show {
-
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
+    @media only screen and (max-width: 1024px) {
+        height: 80vh;
     }
 }
 
 .dialogs {
-    width: 35vw;
-    border-right: 1px solid #2196F3;
+    width: 70%;
+    height: 100%;
+    border-right: 1px solid $border-color;
     background: #E3F2FD;
     box-sizing: border-box;
 }
 
 .find {
-    height: 8rem;
+    height: 10%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #2196F3;
+    justify-content: space-between;
+    border-bottom: 1px solid $border-color;
     box-sizing: border-box;
     padding: 1rem;
 }
 
-.find__icon {
-    width: 3.5rem;
-    height: 3.5rem;
-    fill: #2196F3;
-    margin-right: 1rem;
-}
-
 .find__input {
-    width: 80%;
-    border: 1px solid #2196F3;
+    width: 75%;
+    border: 1px solid $border-color;
     border-radius: 10px;
     padding: 0.5rem 1rem;
 }
 
 .list {
-    height: calc(90vh - 8rem);
+    height: 90%;
     overflow-y: auto;
     box-sizing: border-box;
     list-style: none;
@@ -60,8 +48,8 @@
 
 .list__item {
     width: 100%;
-    height: 8rem;
-    border-bottom: 1px solid #2196F3;
+    height: 10%;
+    border-bottom: 1px solid $border-color;
     padding: 1rem;
     box-sizing: border-box;
     display: flex;
@@ -70,9 +58,9 @@
     justify-content: space-between;
     overflow: hidden;
 
-    &.active {
-        border-left: 1rem solid #2196F3;
-        background: #ffffff;
+    &.__active {
+        border-left: 1rem solid $chat-pointer;
+        background: $main-background;
     }
 }
 
@@ -85,14 +73,10 @@
 }
 
 .list__item-left-avatar {
-    width: 40%;
-    height: 5rem;
-    fill: #cccccc;
-    margin-right: 2rem;
+    margin-right: 1rem;
 }
 
 .list__item-left {
-    width: 20vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -107,12 +91,12 @@
 }
 
 .list__item-left-text-contact {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: 300
 }
 
 .list__item-left-text-message {
-    width: 15vw;
+    width: 50%;
     margin-top: 0.5rem;
     font-size: 1.8rem;
     font-weight: 300;
@@ -128,8 +112,8 @@
 
 .list__item-right-counter {
     margin-top: 1rem;
-    color: #ffffff;
-    background-color: #2196F3;
+    color: $unread-counter-text;
+    background-color: $unread-counter-background;
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
@@ -141,14 +125,15 @@
 }
 
 .dialog {
-    width: 60%;
+    height: 100%;
+    width: 100%;
     box-sizing: border-box;
 }
 
 .messages {
     margin: 0;
     padding: 2rem;
-    height: 80vh;
+    height: 90%;
     display: flex;
     flex-direction: column-reverse;
     justify-content: flex-start;
@@ -162,24 +147,25 @@
     flex-direction: row;
     justify-content: flex-start;
     box-sizing: border-box;
+
     &.__send {
         justify-content: flex-end;
     }
 }
 
 .messages__item-block {
-    background: #00000010;
+    background: $light3;
     padding: 1rem;
     max-width: 60%;
     margin: 1rem 0;
     border-radius: 0 10px 10px 0;
-    border-left: 0.5rem solid #69F0AE;
+    border-left: 0.5rem solid $message-pointer-left;
     box-sizing: border-box;
 
     &.__send {
         border-radius: 10px 0 0 10px;
         border-left: none;
-        border-right: 0.5rem solid #2196F3;
+        border-right: 0.5rem solid $message-pointer-right;
     }
 }
 
@@ -188,26 +174,26 @@
 }
 
 .shipment {
+    height: 10%;
     width: 100%;
-    height: 10vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     padding: 1rem;
     box-sizing: border-box;
-    border-top: 1px solid #2196F3;
+    border-top: 1px solid $border-color;
 }
 
-.shipment__icon {
+.icon {
     width: 3.5rem;
     height: 3.5rem;
-    fill: #2196F3;
+    color: $icons-color;
 }
 
 .shipment__input {
     width: 60%;
-    border: 1px solid #2196F3;
+    border: 1px solid $border-color;
     border-radius: 10px;
     padding: 0.5rem 1rem;
     margin: 0 1rem;

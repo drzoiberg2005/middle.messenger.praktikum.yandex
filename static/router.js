@@ -4,6 +4,7 @@ import Chat from '../src/pages/chat/index.js'
 import Profile from '../src/pages/profile/index.js'
 import Page500 from '../src/pages/500/index.js'
 import Page404 from '../src/pages/404/index.js'
+import Messages from '../src/pages/chat/components/messages.js'
 
 const pathtoRegex = (path) => new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$')
 
@@ -18,7 +19,6 @@ const getParams = (match) => {
 
 export const navigateTo = (url) => {
     history.pushState(null, null, url)
-    localStorage.setItem('lasturl', url)
     router()
 }
 
@@ -38,7 +38,7 @@ export const router = async () => {
         },
         {
             path: '/chats/:id',
-            page: Chat
+            page: Messages
         },
         {
             path: '/profile',
@@ -52,7 +52,6 @@ export const router = async () => {
             path: '/404',
             page: Page404
         }
-
     ]
 
     const variableMatches = routes.map((route) => {
@@ -70,5 +69,5 @@ export const router = async () => {
         }
     }
 
-    const view = new match.route.page(getParams(match))
+    new match.route.page(getParams(match))
 }
