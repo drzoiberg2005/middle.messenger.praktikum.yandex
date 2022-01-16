@@ -2,23 +2,13 @@
 
     font-family: 'Montserrat';
 
-    src: url('./Montserrat/Montserrat-Light.ttf');
-
-    font-weight: 100;
-
-    font-style: normal;
-
-}
-
-@font-face {
-
-    font-family: 'Montserrat';
-
-    src: url('./Montserrat/Montserrat-Regular.ttf');
+    src: local('Montserrat'),
+        url('./Montserrat/montserratlight.woff2'),
+        format("woff2");
 
     font-weight: 300;
 
-    font-style: normal;
+    font-style: thin;
 
 }
 
@@ -26,7 +16,9 @@
 
     font-family: 'Montserrat';
 
-    src: url('./Montserrat/Montserrat-Medium.ttf');
+    src: local('Montserrat'),
+        url('./Montserrat/montserrat.woff2'),
+        format("woff2");
 
     font-weight: 600;
 
@@ -38,7 +30,9 @@
 
     font-family: 'Montserrat';
 
-    src: url('./Montserrat/Montserrat-Bold.ttf');
+    src: local('Montserrat'),
+        url('./Montserrat/montserratbold.woff2'),
+        format("woff2");
 
     font-weight: bold;
 
