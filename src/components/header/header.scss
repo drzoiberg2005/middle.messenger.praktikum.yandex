@@ -1,0 +1,38 @@
+@import '../../../static/variables';
+
+.header {
+    height: 10%;
+    width: 100%;
+    color: $header-text;
+    background: $header-background;
+    display: flex;
+    flex-direction: row;
+    padding: 0 3rem;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.header__title {
+    font-size: 3.6rem;
+    font-weight: 600
+}
+
+.header__user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header__user-name {
+    font-size: 2.4rem;
+    font-weight: lighter
+}
+
+.header__user-avatar {
+    margin-right: 1rem;
+}

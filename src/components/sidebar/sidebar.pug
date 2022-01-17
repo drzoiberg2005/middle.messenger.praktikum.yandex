@@ -1,0 +1,12 @@
+div.sidebar
+    ul.sidebar__menu
+        li(data-link='/chats')
+            div.sidebar__menu-item#button-chat(data-link='/chats')
+                svg.sidebar__menu-item-icon(data-link='/chats')
+                    use(xlink:href='../../static/comments.svg#comments' data-link='/chats')
+        li
+            div.sidebar__menu-item#button-profile(data-link='/profile')
+                svg.sidebar__menu-item-icon(data-link='/profile')
+                    use(xlink:href='../../static/user.svg#user' data-link='/profile')
+    span.sidebar__logo#logo(data-link='/500')
+

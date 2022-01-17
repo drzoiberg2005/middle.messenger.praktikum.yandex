@@ -1,0 +1,118 @@
+@import '../../../static/variables';
+
+.profile {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+    @media only screen and (max-width: 1024px) {
+        height: 80vh;
+        flex-direction: column;
+    }
+}
+
+
+.profile__block-avatar {
+    margin-right: 3rem;
+
+    @media only screen and (max-width: 1024px) {
+        margin: 2rem 0;
+    }
+}
+
+.profile__block-info {
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.profile__block-title {
+    font-size: 3.6rem;
+    font-weight: 600;
+}
+
+.profile__block-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.8rem;
+    margin-top: 10px;
+}
+
+.profile__block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile__block-item-title {
+    font-weight: 600;
+}
+
+.profile__block-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-left: 4rem;
+
+    @media only screen and (max-width: 1024px) {
+        margin-left: 0
+    }
+}
+
+.profile__input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profile__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #00000080;
+
+    &.__visible {
+        display: flex;
+    }
+}
+
+.profile__modal-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: $block-background-accent;
+    border-radius: 10px;
+    padding: 5rem;
+}
+
+.profile__modal-input {
+    display: none;
+}
+
+.profile__modal-title {
+    font-size: 2.4rem;
+}
+
+.profile__change-block {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

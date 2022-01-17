@@ -1,0 +1,26 @@
+@import '../../../static/variables';
+
+.button {
+    display: flex;
+    background: $button-background;
+    border-radius: 10px;
+    color: $button-text;
+    width: 25rem;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    padding: 2rem;
+    cursor: pointer;
+
+    &.__invert {
+        background: $button-background-invert;
+        border: 1px solid $border-color;
+        color: $button-text-invert;
+    }
+
+    &.__cancel {
+        background: $button-backround-cancel;
+    }
+}

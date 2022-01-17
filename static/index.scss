@@ -1,0 +1,18 @@
+@import './variables';
+
+html {
+    width: 100vw !important;
+    font-size: min(10px, calc(100vw / 50));
+    font-family: Montserrat;
+}
+
+body {
+    margin: 0;
+    background: $main-background;
+    color: $main-text;
+}
+
+button {
+    background: none;
+    border: none;
+}
