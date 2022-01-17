@@ -11,7 +11,7 @@ ___
 ##### Данное приложение создано в рамках курса Мидл фронтенд-разработчик на платформе Яндекс.Практикум. 
 
 ___
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/dd2d5a0a-1e16-40d8-a944-8e6f545d520a/deploy-status)](https://app.netlify.com/sites/mediator-chat/deploys)
 ####  Открыть опубликованный проект на [Netlify](https://mediator-chat.netlify.app/ "https://mediator-chat.netlify.app/")
 
 ___
