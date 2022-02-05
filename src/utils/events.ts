@@ -1,5 +1,5 @@
 import { Verify, FormData } from "../layout/block/types";
-import Validation from "./Validation";
+import Validation from "./validation";
 
 const inputFocus = (event: Event): void => {
   const input = event.target as HTMLInputElement;
