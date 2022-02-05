@@ -1,7 +1,7 @@
 @import '../../../static/variables';
 
 .header {
-    height: 10%;
+    height: 10vh;
     width: 100%;
     color: $header-text;
     background: $header-background;
@@ -23,7 +23,7 @@
 .header__user {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     cursor: pointer;
 }

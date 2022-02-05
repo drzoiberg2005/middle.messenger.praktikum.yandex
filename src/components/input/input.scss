@@ -1,0 +1,27 @@
+@import '../../../static/variables';
+
+.input__unit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    &.__hide {
+        display: none;
+    }
+}
+
+.input__title {
+    font-size: 1.6rem;
+}
+
+.input__input {
+    width: 50%;
+    font-size: 1.6rem;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    border: 1px solid $border-color;
+    &.__error {
+        border-color: $accent2;
+        }
+}

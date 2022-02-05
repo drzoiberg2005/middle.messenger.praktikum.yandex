@@ -25,14 +25,17 @@
     align-items: center;
     list-style: none;
     padding: 0;
+
     @media only screen and (max-width: 1024px) {
         flex-direction: row;
     }
 }
 
 .sidebar__menu-item {
-    padding: 0.5rem 3rem;
+    padding: 0.7rem 3rem;
     box-sizing: border-box;
+    width: 10rem;
+    height: 5rem;
     margin-top: 4rem;
     border: none;
     background: none;
@@ -53,14 +56,10 @@
         transition-duration: 0.5s;
         transition-timing-function: ease-in
     }
+
     @media only screen and (max-width: 1024px) {
         margin-top: 0;
     }
-}
-
-.sidebar__menu-item-icon {
-    width: 4.5rem;
-    height: 4.5rem;
 }
 
 .sidebar__logo {
