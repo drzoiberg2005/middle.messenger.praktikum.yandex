@@ -1,6 +1,6 @@
 import render from "../src/utils/renderDom";
-import Simple from "../src/Layout/simple";
-import Main from "../src/Layout/main";
+import Simple from "../src/layout/simple";
+import Main from "../src/layout/main";
 
 const pathtoRegex = (path: string) =>
   new RegExp(`^${  path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)")  }$`);
