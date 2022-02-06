@@ -8,11 +8,11 @@ export default class Page500 extends Block {
   constructor(props: Props = {}) {
     const button = new Button({
       label: "На главную",
-      class: "button",
+      className: "button",
       events: { click: () => navigateTo("/") },
     });
 
-    super("div", { ...props, button });
+    super("div", { id: props.id, classname: props.className, button });
   }
 
   render() {

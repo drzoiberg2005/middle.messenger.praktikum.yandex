@@ -4,6 +4,7 @@ import Form from "../../components/form";
 import { registerForm } from "../../constants/inputs";
 import { navigateTo } from "../../../static/router";
 import { template } from "./register.tmpl";
+import { formSubmit } from "../../utils/events";
 
 export default class Register extends Block {
   constructor(props: Props = {}) {
@@ -13,18 +14,12 @@ export default class Register extends Block {
       formButtons: [
         {
           label: "Зарегистрироваться",
-          class: "button",
+          className: "button",
           type: "submit",
-          events: {
-            click: (e: Event) => {
-              e.preventDefault();
-              form.setProps({ warning: "HI" });
-            },
-          },
         },
         {
           label: "Войти",
-          class: "button __invert",
+          className: "button __invert",
           type: "cancel",
           events: {
             click: (e: Event) => {
@@ -34,9 +29,12 @@ export default class Register extends Block {
           },
         },
       ],
+      events: {
+        submit: formSubmit,
+      },
     });
 
-    super("div", { ...props, form });
+    super("div", { id: props.id, classname: props.className, form });
   }
 
   render() {

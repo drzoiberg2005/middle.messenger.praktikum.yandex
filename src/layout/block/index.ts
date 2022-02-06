@@ -10,12 +10,17 @@ abstract class Block {
     FLOW_CWU: "flow:component-will-unmount",
     FLOW_RENDER: "flow:render",
   };
+
   private element: HTMLElement;
+
   private tagName: string;
 
   protected eventBus: EventBus;
+
   protected props: Props;
+
   protected children: Children;
+
   protected id: string;
 
   public constructor(tagName: string = "div", propsAndChildren: Props = {}) {
@@ -97,12 +102,11 @@ abstract class Block {
 
   private makePropsProxy(props: Props): Props {
     const proxySetting = {
-      get: (target: Props, prop: string): unknown => {
-        return target[prop];
-      },
+      get: (target: Props, prop: string): unknown => target[prop],
 
       set: (target: Props, prop: string, value: unknown): boolean => {
         const oldProps = target[prop];
+        // eslint-disable-next-line no-param-reassign
         target[prop] = value;
 
         this.eventBus.emit(this.EVENTS.FLOW_CDU, oldProps, target[prop]);
@@ -111,6 +115,7 @@ abstract class Block {
 
       deleteProperty: (target: Props, prop: string): boolean => {
         const oldProps = target[prop];
+        // eslint-disable-next-line no-param-reassign
         delete target[prop];
 
         this.eventBus.emit(this.EVENTS.FLOW_CDU, oldProps, target[prop]);
@@ -141,6 +146,7 @@ abstract class Block {
     this.element = this.createDocumentElement(this.tagName);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   private createDocumentElement(tagName: string): HTMLElement {
     return document.createElement(tagName);
   }
@@ -150,7 +156,7 @@ abstract class Block {
 
     if (events) {
       Object.keys(events).forEach((eventName) => {
-        this.element.addEventListener(eventName, events[eventName]);
+        this.element.addEventListener(eventName, events[eventName], true);
       });
     }
   }
@@ -165,6 +171,7 @@ abstract class Block {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   private getChildren(propsAndChildren: Props) {
     const children: Record<string, Block> | any = {};
     const props: Props = {};
@@ -209,6 +216,7 @@ abstract class Block {
     Object.values(this.children).forEach((child) => {
       if (Array.isArray(child) && Object.values(child[0])[0] instanceof Block) {
         child.forEach((innerChild: Children) => {
+          // eslint-disable-next-line no-unused-vars
           Object.entries(innerChild).forEach(([innerChildKey, child]) => {
             const stub = fragment.content.querySelector(
               `[data-id="${child.id}"]`

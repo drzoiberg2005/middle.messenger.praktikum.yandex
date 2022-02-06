@@ -9,7 +9,6 @@ const inputFocus = (event: Event): void => {
 const inputBlur = (event: Event): void => {
   const input = event.target as HTMLInputElement;
   const verifyResult = Validation.verify(input.name, input.value);
-
   toggleErrorElement(input, verifyResult);
 };
 
@@ -17,7 +16,6 @@ const formSubmit = (e: Event): void => {
   e.preventDefault();
   const data: FormData = {};
   const target = e.currentTarget;
-  console.log(target);
   const inputFields = (target as HTMLElement).querySelectorAll("input");
   let validationError: string = "";
   inputFields?.forEach((input: HTMLInputElement) => {
@@ -25,8 +23,8 @@ const formSubmit = (e: Event): void => {
     if (!verify) validationError = message;
     data[input.name] = input.value;
   });
-
   if (validationError.length === 0) {
+    // eslint-disable-next-line no-console
     console.log("Данные формы", data);
   }
 };

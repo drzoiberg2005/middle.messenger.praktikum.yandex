@@ -1,24 +1,15 @@
-export default function template(props: {
-  id: string;
-  title: string;
-  warning: string;
-  class: string;
-  inputs: { [k: string]: string }[];
-  buttons: { [k: string]: string }[];
-}) {
+import { FormProps } from "src/layout/block/types";
+
+export default function template(props: FormProps): string {
   const blockButtons = props.buttons
-    .map((element: { [k: string]: string }): string => {
-      return element.button;
-    })
-    .reduce((a, b) => a + b);
+    ?.map((element) => element.button)
+    .reduce((a: any, b: any) => a + b);
   const blockInputs = props.inputs
-    .map((element: { [k: string]: string }): string => {
-      return element.input;
-    })
-    .reduce((a, b) => a + b);
+    ?.map((element) => element.input)
+    .reduce((a: any, b: any) => a + b);
 
   return `
-  <form id="${props.id}" class="${props.class ? props.class : "form"}">
+  <form id="${props.id}" class="${props.className ? props.className : "form"}"> 
     <div class="form__block">
         ${blockInputs}
     </div>

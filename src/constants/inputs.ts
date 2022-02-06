@@ -19,8 +19,8 @@ export const fileForm = [
   {
     name: "file",
     type: "file",
-    modifikator: "__hide",
-    events: { change: formSubmit },
+    className: "input__unit __hide",
+    events: { change: (formSubmit) },
   },
 ];
 
@@ -98,7 +98,7 @@ export const passwordForm = [
   },
 ];
 
-export let infoForm = [
+export const infoForm = [
   {
     label: "Имя",
     name: "first_name",

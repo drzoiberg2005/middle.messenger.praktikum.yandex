@@ -1,66 +1,52 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import Block from "../../layout/block/index";
-import { Props } from "../../layout/block/types";
+import { FormProps } from "../../layout/block/types";
 import template from "./form.tmpl";
 import "./form.scss";
 import Button from "../button";
 import Input from "../input";
-import { inputBlur, inputFocus } from "../../utils/events";
+import { formSubmit, inputBlur, inputFocus } from "../../utils/events";
 
 export default class Form extends Block {
-  constructor(props: Props = {}) {
-    const buttons = props.formButtons.map(
-      (element: {
-        type: string;
-        label: string;
-        class: string;
-        events: any;
-      }) => {
-        return {
-          button: new Button({
-            type: element.type,
-            label: element.label,
-            class: element.class,
-            events: element.events,
-          }),
-        };
-      }
-    );
+  constructor(props: FormProps) {
+    const buttons = props.formButtons.map((element) => ({
+      button: new Button({
+        type: element.type,
+        label: element.label,
+        className: element.className,
+        events: element.events,
+      }),
+    }));
 
-    const inputs = props.formInputs.map(
-      (element: {
-        type: string;
-        value: string;
-        name: string;
-        label: string;
-        suggested: string;
-        modifikator: string;
-        events: any;
-      }) => {
-        return {
-          input: new Input({
-            type: element.type,
-            value: element.value ? element.value : "",
-            name: element.name,
-            label: element.label,
-            suggested: element.suggested,
-            modifikator: element.modifikator,
-            events: {
-              ...element.events,
-              focus: inputFocus,
-              blur: inputBlur,
-            },
-          }),
-        };
-      }
-    );
+    const inputs = props.formInputs.map((element) => ({
+      input: new Input({
+        type: element.type,
+        value: element.value ? element.value : "",
+        name: element.name,
+        label: element.label,
+        suggested: element.suggested,
+        className: element.className,
+        events: {
+          ...element.events,
+          focus: inputFocus,
+          blur: inputBlur,
+        },
+      }),
+    }));
 
     super("div", {
-      ...props,
+      id: props.id,
       buttons,
       inputs,
-      class: props.class,
+      className: props.className,
+      events: {
+        ...props.events,
+        submit: formSubmit,
+      },
     });
   }
+
   render() {
     return this.setTemplate(template, this.props);
   }

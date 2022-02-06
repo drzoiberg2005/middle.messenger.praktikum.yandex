@@ -3,7 +3,7 @@ import { Props } from "../../layout/block/types";
 import { template } from "./profile.tmpl";
 import "./profile.scss";
 import Button from "../../components/button";
-import { generateavatar } from "../../utils/generateavatar";
+import { generateAvatar } from "../../utils/generateAvatar";
 import { user } from "../../constants/logotype";
 import { navigateTo } from "../../../static/router";
 import Modal from "../../components/modal";
@@ -13,30 +13,8 @@ import { formSubmit } from "../../utils/events";
 
 export default class Profile extends Block {
   constructor(props: Props = {}) {
-    const avatar = new Button({
-      label: generateavatar(user, 20).outerHTML,
-      events: { click: () => modal.show() },
-    });
-
-    let title = user.display_name;
-
-    const btnChangePass = new Button({
-      class: "button",
-      label: "Изменить пароль",
-      events: {
-        click: () => {
-          this.setProps({ title: "", userData: "" });
-          btnChangeData.hide();
-          btnLogout.hide();
-          btnChangePass.hide();
-          avatar.hide();
-          changePass.show();
-        },
-      },
-    });
-
     const btnChangeData = new Button({
-      class: "button",
+      className: "button",
       label: "Изменить данные",
       events: {
         click: () => {
@@ -51,7 +29,7 @@ export default class Profile extends Block {
     });
 
     const btnLogout = new Button({
-      class: "button __cancel",
+      className: "button __cancel",
       label: "Выйти из профиля",
       events: {
         click: () => {
@@ -65,13 +43,16 @@ export default class Profile extends Block {
       formButtons: [
         {
           label: "Выбрать файл",
-          class: "button",
+          className: "button",
           type: "button",
           events: {
             click: () => this.getElement().querySelector("input")?.click(),
           },
         },
       ],
+      events: {
+        submit: formSubmit
+      }
     });
 
     const userInfo: { [k: string]: string } = {
@@ -85,11 +66,11 @@ export default class Profile extends Block {
 
     const userDataTmpl = () => {
       let tmpl = "";
-      for (var key in userInfo) {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const key in userInfo) {
+        // eslint-disable-next-line no-prototype-builtins
         if (userInfo.hasOwnProperty(key)) {
-          tmpl =
-            tmpl +
-            `
+          tmpl += `
             <li class="profile__block-item">
                 <span>${key}</span>
                 <span>${userInfo[key]}</span>
@@ -100,20 +81,19 @@ export default class Profile extends Block {
       return tmpl;
     };
 
-    let userData = userDataTmpl();
+    const userData = userDataTmpl();
 
     const changeData = new Form({
       formInputs: infoForm,
-      warning: "",
       formButtons: [
         {
           label: "Сохранить",
-          class: "button",
+          className: "button",
           type: "submit",
         },
         {
           label: "Закрыть",
-          class: "button __cancel",
+          className: "button __cancel",
           type: "cancel",
           events: {
             click: (e: Event) => {
@@ -136,20 +116,40 @@ export default class Profile extends Block {
       },
     });
 
+    const avatar = new Button({
+      className: "none",
+      label: generateAvatar(user, 20).outerHTML,
+      events: { click: () => modal.show() },
+    });
+
+    const btnChangePass = new Button({
+      className: "button",
+      label: "Изменить пароль",
+      events: {
+        click: () => {
+          this.setProps({ title: "", userData: "" });
+          btnChangeData.hide();
+          btnLogout.hide();
+          btnChangePass.hide();
+          avatar.hide();
+          changePass.show();
+        },
+      },
+    });
+
     changeData.hide();
 
     const changePass = new Form({
       formInputs: passwordForm,
-      warning: "",
       formButtons: [
         {
           label: "Сохранить",
-          class: "button",
+          className: "button",
           type: "submit",
         },
         {
           label: "Закрыть",
-          class: "button __cancel",
+          className: "button __cancel",
           type: "cancel",
           events: {
             click: (e: Event) => {
@@ -177,12 +177,12 @@ export default class Profile extends Block {
     const modal = new Modal({ form: formModal });
 
     super("div", {
-      ...props,
+      id: props.id,
       avatar,
       btnChangeData,
       btnChangePass,
       btnLogout,
-      title,
+      title: user.display_name,
       userData,
       modal,
       changeData,

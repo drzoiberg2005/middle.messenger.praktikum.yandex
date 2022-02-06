@@ -12,8 +12,7 @@ export const template = (props: {
   btnChangePass: Button;
   changeData: Form;
   changePass: Form;
-}) => {
-  return `
+}) => `
     <div class="profile">
     ${props.modal}
         <div class="profile__block-avatar">
@@ -34,4 +33,3 @@ export const template = (props: {
         </div>
     </div
             `;
-};

@@ -1,5 +1,4 @@
-const template = (props: { message: string; in: boolean }) => {
-  return `
+const template = (props: { message: string; in: boolean }) => `
     <div class="messages__item ${props.in ? "__send" : ""}">
         <div class="messages__item-block ${props.in ? "__send" : ""}">
             <span class="message__item-text">
@@ -8,6 +7,5 @@ const template = (props: { message: string; in: boolean }) => {
         </div>
     </div>
     `;
-};
 
 export default template;

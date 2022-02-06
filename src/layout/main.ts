@@ -14,8 +14,9 @@ export default class Main extends Block {
 
     const sidebar = new Sidebar(props);
 
-    const modal = new Modal({ ...props, form: props.modalForm });
+    const modal = new Modal({ id: props.id, classname: props.className, form: props.modalForm });
 
+    // eslint-disable-next-line consistent-return
     const selectComponent = () => {
       switch (props.page) {
         case "Чат":
@@ -29,8 +30,9 @@ export default class Main extends Block {
       }
     };
     const main = selectComponent();
-    super("div", { ...props, header, sidebar, modal, main });
+    super("div", { id: props.id, classname: props.className, header, sidebar, modal, main });
   }
+
   render() {
     return this.setTemplate(template, this.props);
   }

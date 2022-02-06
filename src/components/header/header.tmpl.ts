@@ -1,10 +1,6 @@
-import Button from "../button";
+import { HeaderProps } from "src/layout/block/types";
 
-export default function template(props: {
-  id: string;
-  title: string;
-  button: Button;
-}) {
+export default function template(props: HeaderProps) {
   return `
     <div class="header" id="${props.id}">
         <span class="header__title">${props.title}</span>

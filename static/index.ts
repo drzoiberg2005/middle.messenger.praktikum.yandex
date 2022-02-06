@@ -1,4 +1,3 @@
-import { requestUser } from "../src/utils/requestuser";
 import "./fonts.scss";
 import "./index.scss";
 import { navigateTo, router } from "./router";

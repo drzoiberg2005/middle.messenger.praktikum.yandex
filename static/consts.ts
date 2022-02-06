@@ -1,4 +1,4 @@
-export let messages = [
+export const messages = [
   {
     in: true,
     message: "Hello world!",
@@ -73,7 +73,7 @@ export let messages = [
   },
 ];
 
-export let chats = [
+export const chats = [
   {
     contact: "New Chat",
     message: "last message users",

@@ -9,18 +9,16 @@ import { formSubmit } from "../../utils/events";
 export default class Auth extends Block {
   constructor(props: Props = {}) {
     const form = new Form({
-      title: "FORM",
       formInputs: authForm,
-      warning: "",
       formButtons: [
         {
           label: "Войти",
-          class: "button",
+          className: "button",
           type: "submit",
         },
         {
           label: "Зарегистрироваться",
-          class: "button __invert",
+          className: "button __invert",
           events: {
             click: (e: Event) => {
               e.preventDefault();
@@ -34,7 +32,7 @@ export default class Auth extends Block {
       },
     });
 
-    super("div", { ...props, form });
+    super("div", { id: props.id, classname: props.className, form });
   }
 
   render() {

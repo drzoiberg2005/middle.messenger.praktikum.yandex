@@ -1,15 +1,12 @@
 import addchat from "../../../static/icons/addchat.svg";
+
 export const template = (props: { [x: string]: any }) => {
   const listDialogs = props.listDialogs
-    .map((element: { [k: string]: string }): string => {
-      return `<li>${element.button}</li>`;
-    })
+    .map((element: { [k: string]: string }): string => `<li>${element.button}</li>`)
     .reduce((a: string, b: string) => a + b);
 
   const listMessages = props.listMessages
-    .map((element: { [k: string]: string }): string => {
-      return `<li>${element.button}</li>`;
-    })
+    .map((element: { [k: string]: string }): string => `<li>${element.button}</li>`)
     .reduce((a: string, b: string) => a + b);
 
   return `

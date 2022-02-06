@@ -1,17 +1,13 @@
-import Block from "src/layout/block";
+/* eslint-disable max-len */
+import { InputProps } from "src/layout/block/types";
 
-export default function template(props: {
-  id: string;
-  label: string;
-  modifikator: string;
-  inputFld: Block;
-}) {
+export default function template(props: InputProps) {
   return `
-          <div class="input__unit ${props.modifikator}" id="${props.id}">
+          <div class="${props.className ? props.className : "input__unit"}" id="${props.id}">
             <label class="input__title" for="input${props.id}">
               ${props.label}
             </label>
-            ${props.inputFld}
+            <input id="input${props.id}" class="${props.className ? props.className : "input__input"}" name="${props.name}" type=${props.type} value="${props.value}" suggested="${props.suggested}" autocomplete="on">
           </div>
           `;
 }

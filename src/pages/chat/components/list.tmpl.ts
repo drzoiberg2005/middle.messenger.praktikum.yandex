@@ -3,8 +3,7 @@ const template = (props: {
   message: string;
   time: string;
   counter: string;
-}) => {
-  return `
+}) => `
         <div class="list__item-left">
             <div class="list__item-left-avatar ">
             </div>
@@ -26,6 +25,5 @@ const template = (props: {
             </span>
         </div>
         `;
-};
 
 export default template;

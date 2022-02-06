@@ -7,9 +7,8 @@ import templateDialog from "./components/list.tmpl";
 import templateMessage from "./components/messages.tmpl";
 import { chats, messages } from "../../../static/consts";
 import { formSubmit } from "../../utils/events";
-import paperclip from "../../../static/icons/paperclip.svg";
 import message from "../../../static/icons/message.svg";
-import { fileForm, sendForm } from "../../constants/inputs";
+import { sendForm } from "../../constants/inputs";
 import Form from "../../components/form";
 
 export default class Chat extends Block {
@@ -23,38 +22,33 @@ export default class Chat extends Block {
         message: string;
         time: string;
         counter: string;
-      }) => {
-        return {
-          button: new Button({
-            class: "list__item",
-            label: templateDialog(element),
-            events: {
-              click: () => this.setProps({ class: "list__item __active" }),
-            },
-          }),
-        };
-      }
+      }) => ({
+        button: new Button({
+          className: "list__item",
+          label: templateDialog(element),
+          events: {
+            click: () => this.setProps({ className: "list__item __active" }),
+          },
+        }),
+      })
     );
 
     const listMessages = currentDialog.map(
-      (element: { message: string; in: boolean }) => {
-        return {
-          button: new Button({
-            label: templateMessage(element),
-            events: {},
-          }),
-        };
-      }
+      (element: { message: string; in: boolean }) => ({
+        button: new Button({
+          label: templateMessage(element),
+          className: "none",
+        }),
+      })
     );
 
     const send = new Form({
       formInputs: sendForm,
-      warning: "",
-      class:"shipment",
+      className:"shipment",
       formButtons: [
         {
           label: `<img src='${message}'/>`,
-          class: "icon",
+          className: "icon",
           type: "submit",
         },
       ],
@@ -63,7 +57,7 @@ export default class Chat extends Block {
       },
     });
 
-    super("div", { ...props, listDialogs, listMessages, send });
+    super("div", { id: props.id, classname: props.className, listDialogs, listMessages, send });
   }
 
   render() {

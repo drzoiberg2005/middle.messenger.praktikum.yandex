@@ -6,9 +6,7 @@ export default function template(props: {
   buttons: { [k: string]: string }[];
 }) {
   const blockButtons = props.buttons
-    .map((element: { [k: string]: string }): string => {
-      return `<li>${element.button}</li>`;
-    })
+    .map((element: { [k: string]: string }): string => `<li>${element.button}</li>`)
     .reduce((a, b) => a + b);
 
   return `

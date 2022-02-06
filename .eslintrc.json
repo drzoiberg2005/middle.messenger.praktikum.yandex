@@ -1,15 +1,27 @@
 {
+    "extends": [
+        "airbnb",
+        "prettier"
+    ],
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint"],
     "rules": {
+        "eol-last": ["error", "always"],
         "max-len": [2, 180],
         "quotes": [
             "error",
             "double"
         ],
+        "import/extensions": 0,
+        "import/no-unresolved": 0,
         "indent": ["error", 2, {
             "SwitchCase": 1
-        }]
-    },
-    "extends": ["prettier"]
+        }],
+        "no-restricted-globals": 0,
+        "no-restricted-imports": 0,
+        "no-undef": 0,
+        "no-shadow": 0,
+        "no-use-before-define": 0,
+        "import/prefer-default-export": 0
+    }
 }

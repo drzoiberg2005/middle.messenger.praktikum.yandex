@@ -8,15 +8,16 @@ export default class Modal extends Block {
   constructor(props: Props = {}) {
     const closeBtn = new Button({
       label: "Закрыть",
-      class: "button __cancel",
+      className: "button __cancel",
       events: {
         click: () => {
           this.hide();
         },
       },
     });
-    super("div", { ...props, closeBtn });
+    super("div", { id: props.id, form: props.form, closeBtn });
   }
+
   render() {
     return this.setTemplate(template, this.props);
   }

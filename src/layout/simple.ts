@@ -10,10 +10,11 @@ import Auth from "../pages/auth";
 
 export default class Simple extends Block {
   constructor(props: Props = {}) {
+    // eslint-disable-next-line consistent-return
     const selectComponent = () => {
       switch (props.page) {
         case "404":
-          return new Page404({ ...props });
+          return new Page404(props);
 
         case "500":
           return new Page500(props);
@@ -29,7 +30,7 @@ export default class Simple extends Block {
       }
     };
 
-    super("div", { ...props, logo: logotype, main: selectComponent() });
+    super("div", { id: props.id, classname: props.className, page: props.page, logo: logotype, main: selectComponent() });
   }
 
   render() {

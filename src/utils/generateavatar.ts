@@ -1,4 +1,4 @@
-export const generateavatar = (
+export const generateAvatar = (
   object: {
     first_name: string;
     second_name: string;
@@ -14,33 +14,32 @@ export const generateavatar = (
     user ? object.first_name[0] + object.second_name[0] : object.title[0]
   ).toUpperCase();
   const content = () => {
-    if (object.avatar && object.avatar !== null) {
-      // Delete "!" as I find out how to get an avatar
+    if (object.avatar) {
       const image = document.createElement("img");
       image.setAttribute("src", object.avatar);
       image.style.objectFit = "cover";
       return image;
-    } else {
-      const canvas = document.createElement("canvas");
-      canvas.width = 10 * size;
-      canvas.height = 10 * size;
-      const context = canvas.getContext("2d");
-      if (!context || !(context instanceof CanvasRenderingContext2D)) {
-        throw new Error("Failed to get 2D context");
-      }
-
-      context.fillStyle = background;
-      context.fillRect(0, 0, canvas.width, canvas.height);
-
-      context.font = `${size / 2.5}rem Montserrat-regular`;
-      context.fillStyle = color;
-      context.textAlign = "center";
-      context.textBaseline = "middle";
-      context.fillText(text, canvas.width / 2, canvas.height / 2);
-      const image = document.createElement("img");
-      image.setAttribute("src", canvas.toDataURL("image/png"));
-      return image;
+    } 
+    const canvas = document.createElement("canvas");
+    canvas.width = 10 * size;
+    canvas.height = 10 * size;
+    const context = canvas.getContext("2d");
+    if (!context || !(context instanceof CanvasRenderingContext2D)) {
+      throw new Error("Failed to get 2D context");
     }
+
+    context.fillStyle = background;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    context.font = `${size / 2.5}rem Montserrat-regular`;
+    context.fillStyle = color;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(text, canvas.width / 2, canvas.height / 2);
+    const image = document.createElement("img");
+    image.setAttribute("src", canvas.toDataURL("image/png"));
+    return image;
+    
   };
 
   const avatar = content();

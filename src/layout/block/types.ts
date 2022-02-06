@@ -31,3 +31,40 @@ export type ValidationFields = Record<
 >;
 
 export type FormData = Record<string, string>;
+
+export type Event = { [k: string]: any};
+
+export type ButtonProps = {
+  id?: string;
+  className?: string;
+  type?: string;
+  label: string;
+  events?: Event;
+};
+
+export type FormProps = {
+  id?: string;
+  className?: string;
+  formInputs: InputProps[];
+  formButtons: ButtonProps[];
+  buttons?: { button: InputProps }[];
+  inputs?: { input: InputProps }[];
+  events?: Event;
+};
+
+export type InputProps = {
+  id?: string;
+  label?: string;
+  className?: string;
+  name: string;
+  type: string;
+  value?: string;
+  suggested?: string;
+  events?: Event;
+};
+
+export type HeaderProps = {
+  id?: string;
+  title: string;
+  button: ButtonProps;
+};

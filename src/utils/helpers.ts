@@ -17,7 +17,7 @@ export const sorting = (
     return properties.reduce((prev, curr) => prev && prev[curr as any], obj);
   }
   const copyArray = array.slice();
-  const sortArray = copyArray.sort(function (a, b) {
+  const sortArray = copyArray.sort((a, b) => {
     if (resolve(path, a) > resolve(path, b)) {
       return increase ? -1 : 1;
     }

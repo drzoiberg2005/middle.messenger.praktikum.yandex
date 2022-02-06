@@ -1,3 +1,1 @@
-export const template = (props: { [x: string]: any }) => {
-  return `${props.form}`;
-};
+export const template = (props: { [x: string]: any }) => `${props.form}`;

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "WEB-messenger",
   "scripts": {
+    "eslint": "eslint ./ --ext=.jsx,.js,.tsx,.ts --fix",
     "start": "npm run build && node app.js",
     "dev": "parcel ./static/index.pug",
     "server": "nodemon app.js",
@@ -36,6 +37,7 @@
     "@typescript-eslint/parser": "^5.10.0",
     "cssnano": "^4.1.11",
     "eslint": "^8.8.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
     "nodemon": "^2.0.15",
     "parcel": "^2.0.1",
@@ -47,5 +49,6 @@
     "stylelint-scss": "^4.1.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
-  }
+  },
+  "main": "app.js"
 }

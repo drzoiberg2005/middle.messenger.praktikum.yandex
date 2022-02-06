@@ -14,7 +14,7 @@ export default class Sidebar extends Block {
       {
         button: new Button({
           label: `<img src=${comments}>`,
-          class: `sidebar__menu-item ${props.page === "Чат" ? "__active" : ""}`,
+          className: `sidebar__menu-item ${props.page === "Чат" ? "__active" : ""}`,
           events: {
             click: () => {
               navigateTo("/chat");
@@ -25,7 +25,7 @@ export default class Sidebar extends Block {
       {
         button: new Button({
           label: `<img src=${user}>`,
-          class: `sidebar__menu-item ${
+          className: `sidebar__menu-item ${
             props.page === "Профиль" ? "__active" : ""
           }`,
           events: {
@@ -37,8 +37,9 @@ export default class Sidebar extends Block {
       },
     ];
 
-    super("div", { ...props, buttons, logo: logotype });
+    super("div", { id: props.id, classname: props.className, buttons, logo: logotype });
   }
+
   render() {
     return this.setTemplate(template, this.props);
   }

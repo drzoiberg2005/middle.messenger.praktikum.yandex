@@ -15,7 +15,9 @@ class Validation {
       error: "Укажите логин",
     },
     email: {
-      pattern: /.+@[^@]+[a-z]+\.[^@]{2,}$/,
+      pattern:
+        // eslint-disable-next-line no-useless-escape
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       error: "Укажите email.",
     },
     password: {
@@ -25,7 +27,7 @@ class Validation {
     },
 
     phone: {
-      pattern: /^[+-d]?\d{10,15}$/,
+      pattern: /^((\+7|7|8)+([0-9]){10})$/,
       error: "Укажите телефон",
     },
   };
@@ -43,7 +45,6 @@ class Validation {
       verifyResult.verify = false;
       verifyResult.message = Validation.FIELDS[inputName].error;
     }
-
     return verifyResult;
   }
 }
