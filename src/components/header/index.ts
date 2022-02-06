@@ -3,7 +3,7 @@ import { Props } from "../../layout/block/types";
 import template from "./header.tmpl";
 import "./header.scss";
 import Button from "../button";
-import { generateAvatar } from "../../utils/generateAvatar";
+import { generateAvatar } from "../../utils/generateavatar";
 import { user } from "../../constants/logotype";
 import { navigateTo } from "../../../static/router";
 
