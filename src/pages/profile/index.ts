@@ -49,10 +49,7 @@ export default class Profile extends Block {
             click: () => this.getElement().querySelector("input")?.click(),
           },
         },
-      ],
-      events: {
-        submit: formSubmit
-      }
+      ]
     });
 
     const userInfo: { [k: string]: string } = {
