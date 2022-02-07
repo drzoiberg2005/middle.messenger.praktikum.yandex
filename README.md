@@ -55,3 +55,10 @@ npm run build
 ```
 npm run delete
 ```
+
+#### Запуск анализатора кода
+
+```
+npm run eslint
+```
+=======
