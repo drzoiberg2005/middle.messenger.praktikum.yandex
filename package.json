@@ -2,9 +2,7 @@
   "name": "mediator",
   "version": "1.0.0",
   "description": "WEB-messenger",
-  "engines": {
-    "node": ">=12.0.0"
-  },
+  
   "scripts": {
     "eslint": "eslint ./ --ext=.jsx,.js,.tsx,.ts --fix",
     "start": "npm run build && node app.js",
