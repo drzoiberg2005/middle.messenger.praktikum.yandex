@@ -1,5 +1,5 @@
 import { Props } from "src/layout/block/types";
-import Route from "./Route";
+import Route from "./route";
 
 class Router {
   public routes: Route[];

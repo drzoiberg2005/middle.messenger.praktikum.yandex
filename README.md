@@ -1,5 +1,5 @@
 ___
-## [Ссылка](https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/4 "https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/5") на открытый PR спринт_3 
+## [Ссылка](https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/6 "https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/6") на открытый PR спринт_3 
 
 
 # __МЕДИАТОР__
