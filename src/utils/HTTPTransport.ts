@@ -1,11 +1,5 @@
 /* eslint-disable no-unused-vars */
-type Options = {
-  timeout?: number;
-  method: string;
-  headers?: Record<string, string>;
-  data?: Record<string, any>;
-  params?: Record<string, any>;
-};
+import { Options } from "src/layout/block/types";
 
 enum METHODS {
   GET = "GET",
@@ -43,18 +37,26 @@ export default class HTTPTransport {
   };
 
   private request = (url: string, options: Options, timeout = 5000) => {
-    const { headers = {}, method, data, params } = options;
+    const { headers = {}, method, credentials, data, body } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
 
-      xhr.open(method, params ? `${url}${this.queryStringify(params)}` : url);
+      xhr.open(
+        method,
+        isGet && data ? `${url}${this.queryStringify(data)}` : url
+      );
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
 
+      if (credentials) {
+        xhr.withCredentials = true;
+      }
+
+      xhr.responseType = "json";
       xhr.timeout = timeout;
 
       xhr.onload = () => resolve(xhr);
@@ -64,8 +66,12 @@ export default class HTTPTransport {
 
       if (isGet) {
         xhr.send();
-      } else {
-        xhr.send(JSON.stringify(data));
+      }
+      if (body) {
+        xhr.send(JSON.stringify(body));
+      }
+      if (!isGet && data) {
+        xhr.send(data as Document);
       }
     });
   };

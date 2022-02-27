@@ -1,4 +1,5 @@
-
+/* eslint-disable no-param-reassign */
+import { Props } from "src/layout/block/types";
 
 // Checking for an empty field
 export const isEmptyField = (data: { [x: string]: string }) => {
@@ -27,4 +28,51 @@ export const sorting = (
     return 0;
   });
   return sortArray;
+};
+
+export const isEmpty = (obj: Props) => {
+  if (Object.keys(obj).length === 0) {
+    return true;
+  }
+
+  return false;
+};
+
+export const merge = (lhs: Props, rhs: Props) => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const p in rhs) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (!rhs.hasOwnProperty(p)) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    try {
+      if (rhs[p].constructor === Object) {
+        rhs[p] = merge(lhs[p], rhs[p]);
+      } else {
+        lhs[p] = rhs[p];
+      }
+    } catch (e) {
+      lhs[p] = rhs[p];
+    }
+  }
+
+  return lhs;
+};
+
+export const set = (object: Props, path: string, value: any) => {
+  if (typeof path !== "string") {
+    throw new Error("path must be string");
+  }
+  if (typeof object !== "object") {
+    return object;
+  }
+  const result = path.split(".").reduceRight(
+    (acc, key) => ({
+      [key]: acc,
+    }),
+    value as any
+  );
+
+  return merge(object, result);
 };

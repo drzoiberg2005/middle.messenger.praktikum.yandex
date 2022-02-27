@@ -1,10 +1,7 @@
+import { Props } from "src/layout/block/types";
+
 export const generateAvatar = (
-  object: {
-    first_name: string;
-    second_name: string;
-    title: string;
-    avatar: string | null;
-  },
+  object: Props,
   size = 10,
   user = true,
   color = "#ffffff",
@@ -16,10 +13,13 @@ export const generateAvatar = (
   const content = () => {
     if (object.avatar) {
       const image = document.createElement("img");
-      image.setAttribute("src", object.avatar);
+      image.setAttribute(
+        "src",
+        `https://ya-praktikum.tech/api/v2/resources${object.avatar}`
+      );
       image.style.objectFit = "cover";
       return image;
-    } 
+    }
     const canvas = document.createElement("canvas");
     canvas.width = 10 * size;
     canvas.height = 10 * size;
@@ -39,10 +39,10 @@ export const generateAvatar = (
     const image = document.createElement("img");
     image.setAttribute("src", canvas.toDataURL("image/png"));
     return image;
-    
   };
 
   const avatar = content();
+  avatar.setAttribute("id", "avatar");
   avatar.style.borderRadius = "50%";
   avatar.style.height = `${size}rem`;
   avatar.style.width = `${size}rem`;

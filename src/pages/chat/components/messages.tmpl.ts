@@ -1,11 +1,13 @@
-const template = (props: { message: string; in: boolean }) => `
-    <div class="messages__item ${props.in ? "__send" : ""}">
-        <div class="messages__item-block ${props.in ? "__send" : ""}">
+import { Props } from "../../../layout/block/types";
+
+const template = (message: Props, id: number) =>
+  `<li class="messages__item ${message.message.user_id === id ? "__send" : ""}">
+        <div class="messages__item-block ${message.message.user_id === id ? "__send" : ""}">
             <span class="message__item-text">
-                ${props.message}
+                ${message.message.content}
             </span>
         </div>
-    </div>
+    </li>
     `;
 
 export default template;

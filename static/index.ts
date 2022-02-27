@@ -1,15 +1,14 @@
 import "./fonts.scss";
 import "./index.scss";
-import { navigateTo, router } from "./router";
+import router from "../src/utils/router";
+import Main from "../src/layout/main";
+import Simple from "../src/layout/simple";
 
-window.addEventListener("popstate", router);
-
-document.addEventListener("DOMContentLoaded", async () => {
-  document.body.addEventListener("click", (e) => {
-    if ((e.target as Element).matches("[data-link]")) {
-      e.preventDefault();
-      navigateTo((e.target as Element).getAttribute("data-link"));
-    }
-  });
-  router();
-});
+router
+  .use("/", Simple, { page: "Авторизация" })
+  .use("/sign-up", Simple, { page: "Регистрация" })
+  .use("/messenger", Main, { page: "Чат" })
+  .use("/settings", Main, { page: "Профиль" })
+  .use("/500", Simple, { page: "500" })
+  .use("/404", Simple, { page: "404" })
+  .start();

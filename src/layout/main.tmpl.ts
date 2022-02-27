@@ -12,7 +12,6 @@ export default function template(props: {
 }) {
   return `
       <div id="${props.id}" class="main__page">
-      ${props.modal}
           ${props.sidebar}
           <div class="content">
               ${props.header}

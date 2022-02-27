@@ -1,5 +1,5 @@
 ___
-## [Ссылка](https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/4 "https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/4") на открытый PR спринт_2 
+## [Ссылка](https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/4 "https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/5") на открытый PR спринт_3 
 
 
 # __МЕДИАТОР__
@@ -60,5 +60,12 @@ npm run delete
 
 ```
 npm run eslint
+```
+=======
+
+#### Запуск теста
+
+```
+npm run test
 ```
 =======

@@ -1,3 +1,4 @@
+import router from "../../utils/router";
 import Block from "../../layout/block/index";
 import { Props } from "../../layout/block/types";
 import template from "./sidebar.tmpl";
@@ -5,7 +6,6 @@ import comments from "../../../static/icons/comments.svg";
 import user from "../../../static/icons/user.svg";
 import "./sidebar.scss";
 import Button from "../button";
-import { navigateTo } from "../../../static/router";
 import { logotype } from "../../constants/logotype";
 
 export default class Sidebar extends Block {
@@ -14,10 +14,12 @@ export default class Sidebar extends Block {
       {
         button: new Button({
           label: `<img src=${comments}>`,
-          className: `sidebar__menu-item ${props.page === "Чат" ? "__active" : ""}`,
+          className: `sidebar__menu-item ${
+            props.page === "Чат" ? "__active" : ""
+          }`,
           events: {
             click: () => {
-              navigateTo("/chat");
+              router.go("/messenger");
             },
           },
         }),
@@ -30,14 +32,14 @@ export default class Sidebar extends Block {
           }`,
           events: {
             click: () => {
-              navigateTo("/profile");
+              router.go("/settings");
             },
           },
         }),
       },
     ];
 
-    super("div", { id: props.id, classname: props.className, buttons, logo: logotype });
+    super("div", { ...props, ...{ buttons, logo: logotype } });
   }
 
   render() {

@@ -1,4 +1,7 @@
+import users from "../controllers/users";
+import auth from "../controllers/auth";
 import { Verify, FormData } from "../layout/block/types";
+import router from "./router";
 import Validation from "./validation";
 
 const inputFocus = (event: Event): void => {
@@ -12,8 +15,7 @@ const inputBlur = (event: Event): void => {
   toggleErrorElement(input, verifyResult);
 };
 
-const formSubmit = (e: Event): void => {
-  e.preventDefault();
+const formCheck = (e: Event) => {
   const data: FormData = {};
   const target = e.currentTarget;
   const inputFields = (target as HTMLElement).querySelectorAll("input");
@@ -24,9 +26,9 @@ const formSubmit = (e: Event): void => {
     data[input.name] = input.value;
   });
   if (validationError.length === 0) {
-    // eslint-disable-next-line no-console
-    console.log("Данные формы", data);
+    return data;
   }
+  return null;
 };
 
 const toggleErrorElement = (
@@ -35,7 +37,8 @@ const toggleErrorElement = (
 ): void => {
   if (!verifyResult.verify) {
     input.classList.add("__error");
-    const warning = document.body.querySelector(
+    const form = input.parentNode?.parentNode?.parentNode
+    const warning = form?.querySelector(
       ".form__warning-message"
     ) as HTMLElement;
     if (warning) {
@@ -43,4 +46,62 @@ const toggleErrorElement = (
     }
   }
 };
-export { inputFocus, inputBlur, formSubmit };
+
+const signIn = (e: Event) => {
+  e.preventDefault();
+  const data = formCheck(e);
+  if (data) {
+    auth.signIn(data);
+  }
+};
+
+const signUp = (e: Event) => {
+  e.preventDefault();
+  const data = formCheck(e);
+  if (data) {
+    auth.signUp(data);
+  }
+};
+
+const changeUserData = (e: Event) => {
+  e.preventDefault();
+  const data = formCheck(e);
+  if (data) {
+    users.changeUserProfile(data);
+  }
+};
+
+const changePassword = (e: Event) => {
+  e.preventDefault();
+  const data = formCheck(e);
+  if (data) {
+    users.changeUserPassword(data);
+  }
+};
+
+const logOut = (e: Event) => {
+  e.preventDefault();
+  auth.logout();
+  router.go("/");
+};
+
+const goProfile = (e: Event): void => {
+  if (
+    // eslint-disable-next-line no-constant-condition
+    (e.target as HTMLElement).className === "header__user-name" ||
+    "header__user-avatar"
+  ) {
+    router.go("/settings");
+  }
+};
+
+export {
+  inputFocus,
+  inputBlur,
+  signIn,
+  signUp,
+  logOut,
+  goProfile,
+  changeUserData,
+  changePassword,
+};

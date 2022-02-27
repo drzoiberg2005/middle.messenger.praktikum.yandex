@@ -37,8 +37,9 @@ export type Event = { [k: string]: any};
 export type ButtonProps = {
   id?: string;
   className?: string;
+  name?: string;
   type?: string;
-  label: string;
+  label?: string;
   events?: Event;
 };
 
@@ -65,6 +66,7 @@ export type InputProps = {
 
 export type HeaderProps = {
   id?: string;
-  title: string;
-  button: ButtonProps;
+  page: string;
+  headerLabel: ButtonProps;
+  user?: Props
 };

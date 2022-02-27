@@ -6,7 +6,7 @@ import template from "./form.tmpl";
 import "./form.scss";
 import Button from "../button";
 import Input from "../input";
-import { formSubmit, inputBlur, inputFocus } from "../../utils/events";
+import { inputBlur, inputFocus } from "../../utils/events";
 
 export default class Form extends Block {
   constructor(props: FormProps) {
@@ -36,13 +36,10 @@ export default class Form extends Block {
     }));
 
     super("div", {
-      id: props.id,
-      buttons,
-      inputs,
-      className: props.className,
-      events: {
-        ...props.events,
-        submit: formSubmit,
+      ...props,
+      ...{
+        buttons,
+        inputs,
       },
     });
   }

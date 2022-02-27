@@ -1,10 +1,10 @@
+import router from "../../utils/router";
 import Block from "../../layout/block/index";
 import { Props } from "../../layout/block/types";
 import Form from "../../components/form";
 import { authForm } from "../../constants/inputs";
-import { navigateTo } from "../../../static/router";
 import { template } from "./register.tmpl";
-import { formSubmit } from "../../utils/events";
+import { signIn } from "../../utils/events";
 
 export default class Auth extends Block {
   constructor(props: Props = {}) {
@@ -22,13 +22,13 @@ export default class Auth extends Block {
           events: {
             click: (e: Event) => {
               e.preventDefault();
-              navigateTo("/register");
+              router.go("/sign-up");
             },
           },
         },
       ],
       events: {
-        submit: formSubmit
+        submit: signIn,
       },
     });
 

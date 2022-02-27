@@ -1,5 +1,5 @@
-import { formSubmit } from "../utils/events";
-import { user } from "./logotype";
+import users from "../controllers/users";
+import { Event, Props } from "../layout/block/types";
 
 export const authForm = [
   {
@@ -20,15 +20,13 @@ export const fileForm = [
     name: "file",
     type: "file",
     className: "input__unit __hide",
-    events: { change: (formSubmit) },
-  },
-];
-
-export const sendForm = [
-  {
-    label: "Сообщение",
-    name: "message",
-    type: "text",
+    events: {
+      change: (e: Event) => {
+        const data = new FormData();
+        data.append("avatar", e.target?.files[0]);
+        users.changeUserAvatar(data);
+      },
+    },
   },
 ];
 
@@ -41,11 +39,6 @@ export const registerForm = [
   {
     label: "Фамилия",
     name: "second_name",
-    type: "text",
-  },
-  {
-    label: "Имя в чате",
-    name: "display_name",
     type: "text",
   },
   {
@@ -69,12 +62,6 @@ export const registerForm = [
     type: "password",
     suggested: "new-password",
   },
-  {
-    label: "Пароль еще раз",
-    name: "retrypassword",
-    type: "password",
-    suggested: "new-password",
-  },
 ];
 
 export const passwordForm = [
@@ -90,15 +77,9 @@ export const passwordForm = [
     type: "password",
     suggested: "new-password",
   },
-  {
-    label: "Пароль еще раз",
-    name: "retrypassword",
-    type: "password",
-    suggested: "new-password",
-  },
 ];
 
-export const infoForm = [
+export const infoForm = (user: Props) => [
   {
     label: "Имя",
     name: "first_name",

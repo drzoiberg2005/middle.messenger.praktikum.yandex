@@ -1,87 +1,71 @@
+import { Props } from "src/layout/block/types";
 import Block from "../../layout/block/index";
-import { Props } from "../../layout/block/types";
 import { template } from "./profile.tmpl";
 import "./profile.scss";
 import Button from "../../components/button";
-import { generateAvatar } from "../../utils/generateavatar";
-import { user } from "../../constants/logotype";
-import { navigateTo } from "../../../static/router";
 import Modal from "../../components/modal";
 import Form from "../../components/form";
 import { fileForm, infoForm, passwordForm } from "../../constants/inputs";
-import { formSubmit } from "../../utils/events";
+import store, { StoreEvents } from "../../constants/store";
+import { changePassword, changeUserData, logOut } from "../../utils/events";
+import auth from "../../controllers/auth";
+import { isEmpty } from "../../utils/helpers";
+import chats from "../../controllers/chats";
 
 export default class Profile extends Block {
   constructor(props: Props = {}) {
-    const btnChangeData = new Button({
-      className: "button",
-      label: "Изменить данные",
-      events: {
-        click: () => {
-          this.setProps({ title: "", userData: "" });
-          btnChangeData.hide();
-          btnLogout.hide();
-          btnChangePass.hide();
-          avatar.hide();
-          changeData.show();
-        },
-      },
-    });
+    if (props.user === "undefined") {
+      throw new Error("Cannot be called directly");
+    }
 
     const btnLogout = new Button({
       className: "button __cancel",
       label: "Выйти из профиля",
       events: {
-        click: () => {
-          navigateTo("/");
+        click: logOut,
+      },
+    });
+
+    const btnChangeData = new Button({
+      className: "button",
+      label: "Изменить данные",
+      events: {
+        click: (e: Event) => {
+          e.preventDefault();
+          (
+            document.querySelector(".profile__block") as HTMLElement
+          ).style.display = "none";
+          (
+            document.querySelector(".profile__block-avatar") as HTMLElement
+          ).style.display = "none";
+          btnChangePass.hide();
+          btnChangeData.hide();
+          changeData.show();
         },
       },
     });
 
-    const formModal = new Form({
-      formInputs: fileForm,
-      formButtons: [
-        {
-          label: "Выбрать файл",
-          className: "button",
-          type: "button",
-          events: {
-            click: () => this.getElement().querySelector("input")?.click(),
-          },
+    const btnChangePass = new Button({
+      className: "button",
+      label: "Изменить пароль",
+      events: {
+        click: (e: Event) => {
+          e.preventDefault();
+          (
+            document.querySelector(".profile__block") as HTMLElement
+          ).style.display = "none";
+          (
+            document.querySelector(".profile__block-avatar") as HTMLElement
+          ).style.display = "none";
+          btnChangePass.hide();
+          btnChangeData.hide();
+          changePass.show();
         },
-      ]
+      },
     });
 
-    const userInfo: { [k: string]: string } = {
-      ID: user.id,
-      Имя: user.first_name,
-      Фамилия: user.second_name,
-      Логин: user.login,
-      "E-mail": user.email,
-      Телефон: user.phone,
-    };
-
-    const userDataTmpl = () => {
-      let tmpl = "";
-      // eslint-disable-next-line no-restricted-syntax
-      for (const key in userInfo) {
-        // eslint-disable-next-line no-prototype-builtins
-        if (userInfo.hasOwnProperty(key)) {
-          tmpl += `
-            <li class="profile__block-item">
-                <span>${key}</span>
-                <span>${userInfo[key]}</span>
-            </li>
-            `;
-        }
-      }
-      return tmpl;
-    };
-
-    const userData = userDataTmpl();
-
     const changeData = new Form({
-      formInputs: infoForm,
+      formInputs: infoForm(store.getState().user),
       formButtons: [
         {
           label: "Сохранить",
@@ -95,46 +79,23 @@ export default class Profile extends Block {
           events: {
             click: (e: Event) => {
               e.preventDefault();
-              this.setProps({
-                title: user.display_name,
-                userData: userDataTmpl(),
-              });
-              btnChangeData.show();
-              btnLogout.show();
+              (
+                document.querySelector(".profile__block") as HTMLElement
+              ).style.display = "flex";
+              (
+                document.querySelector(".profile__block-avatar") as HTMLElement
+              ).style.display = "flex";
               btnChangePass.show();
-              avatar.show();
+              btnChangeData.show();
               changeData.hide();
             },
           },
         },
       ],
       events: {
-        submit: formSubmit,
+        submit: changeUserData
       },
     });
-
-    const avatar = new Button({
-      className: "none",
-      label: generateAvatar(user, 20).outerHTML,
-      events: { click: () => modal.show() },
-    });
-
-    const btnChangePass = new Button({
-      className: "button",
-      label: "Изменить пароль",
-      events: {
-        click: () => {
-          this.setProps({ title: "", userData: "" });
-          btnChangeData.hide();
-          btnLogout.hide();
-          btnChangePass.hide();
-          avatar.hide();
-          changePass.show();
-        },
-      },
-    });
-
-    changeData.hide();
 
     const changePass = new Form({
       formInputs: passwordForm,
@@ -151,43 +112,79 @@ export default class Profile extends Block {
           events: {
             click: (e: Event) => {
               e.preventDefault();
-              this.setProps({
-                title: user.display_name,
-                userData: userDataTmpl(),
-              });
+              (
+                document.querySelector(".profile__block") as HTMLElement
+              ).style.display = "flex";
+              (
+                document.querySelector(".profile__block-avatar") as HTMLElement
+              ).style.display = "flex";
               btnChangeData.show();
-              btnLogout.show();
               btnChangePass.show();
-              avatar.show();
               changePass.hide();
             },
           },
         },
       ],
       events: {
-        submit: formSubmit,
+        submit: changePassword
       },
     });
 
+    changeData.hide();
     changePass.hide();
 
-    const modal = new Modal({ form: formModal });
+    const formModal = new Form({
+      formInputs: fileForm,
+      formButtons: [
+        {
+          label: "Выбрать файл",
+          className: "button",
+          type: "button",
+          events: {
+            click: () => this.getElement().querySelector("input")?.click(),
+          },
+        },
+      ],
+    });
 
+    const avatarOpen = (e: Event): void => {
+      if (
+        // eslint-disable-next-line no-constant-condition
+        (e.target as HTMLElement).id === "avatar"
+      ) {
+        modal.show();
+      }
+    };
+
+    const modal = new Modal({ form: formModal });
     super("div", {
-      id: props.id,
-      avatar,
-      btnChangeData,
-      btnChangePass,
-      btnLogout,
-      title: user.display_name,
-      userData,
-      modal,
-      changeData,
-      changePass,
+      ...props,
+      ...store.getState(),
+      ...{
+        btnChangeData,
+        btnChangePass,
+        btnLogout,
+        modal,
+        changeData,
+        changePass,
+        events: { click: avatarOpen },
+      },
+    });
+    if (isEmpty(store.getState())) {
+      auth.getUserInfo();
+      chats.getChats();
+    }
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
     });
   }
 
   render() {
     return this.setTemplate(template, this.props);
+  }
+
+  static build() {
+    return new Profile();
   }
 }

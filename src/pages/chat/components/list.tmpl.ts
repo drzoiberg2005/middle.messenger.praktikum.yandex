@@ -1,29 +1,36 @@
+import { Props } from "../../../layout/block/types";
+import { generateAvatar } from "../../../utils/generateavatar";
+
 const template = (props: {
-  contact: string;
-  message: string;
-  time: string;
-  counter: string;
-}) => `
-        <div class="list__item-left">
+  id: number;
+  title: string;
+  last_message: Props;
+  unread_count: number;
+  avatar: string;
+}) =>
+  // const str = props.last_message ? props.last_message.time : "";
+  // const time = str.split("T")[1].split(":");
+  // console.log(`${time[0]}:${time[1]}`)
+  `
+        <li data-value="chats" data-id=${props.id} class="list__item">
             <div class="list__item-left-avatar ">
+            ${generateAvatar(props, 5, false).outerHTML}
             </div>
             <div class="list__item-left-text">
                 <span class="list__item-left-text-contact">
-                    ${props.contact}
+                    ${props.title}
                 </span>
                 <span class="list__item-left-text-message">
-                    ${props.message}
+                    ${props.last_message? props.last_message.content: ""}
                 </span>
             </div>
-        </div>
         <div class="list__item-right">
-            <span class="list__item-right-time">
-                ${props.time}
-            </span>
-            <span class="list__item-right-counter">
-                ${props.counter}
-            </span>
+        <span class="list__item-right-time">
+        </span>
+        ${props.unread_count > 0? `<span class="list__item-right-counter">${props.unread_count}
+        </span>`: ""}
         </div>
+    </li>
         `;
 
 export default template;
