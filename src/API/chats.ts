@@ -1,65 +1,46 @@
 import { BodyRequest, Options } from "src/layout/block/types";
-import MainApi from "./main";
+import HTTPTransport from "../utils/HTTPTransport";
 
-export default class ChatsApi extends MainApi {
+export default class ChatsApi {
+  private http = new HTTPTransport();
 
   public getChats(data: BodyRequest) {
     const options: Options = {
-      credentials: true,
-      headers: {
-        "content-type": "application/json",
-      },
       data,
     };
 
-    return this.http.get(`${this.baseUrl}/chats`, options);
+    return this.http.get("/chats", options);
   }
 
   public createChat(data: BodyRequest) {
     const options: Options = {
-      credentials: true,
-      headers: {
-        "content-type": "application/json",
-      },
       body: data,
     };
 
-    return this.http.post(`${this.baseUrl}/chats`, options);
+    return this.http.post("/chats", options);
   }
 
   public addUserToChat(data: BodyRequest) {
     const options: Options = {
-      credentials: true,
-      headers: {
-        "content-type": "application/json",
-      },
       body: data,
     };
 
-    return this.http.put(`${this.baseUrl}/chats/users`, options);
+    return this.http.put("/chats/users", options);
   }
 
   public deleteUserFromChat(data: BodyRequest) {
     const options: Options = {
-      credentials: true,
-      headers: {
-        "content-type": "application/json",
-      },
       body: data,
     };
 
-    return this.http.delete(`${this.baseUrl}/chats/users`, options);
+    return this.http.delete("/chats/users", options);
   }
 
   public getChatToken(id: string) {
     const options: Options = {
-      credentials: true,
-      headers: {
-        "content-type": "application/json",
-      },
       body: {},
     };
 
-    return this.http.post(`${this.baseUrl}/chats/token/${id}`, options);
+    return this.http.post(`/chats/token/${id}`, options);
   }
 }

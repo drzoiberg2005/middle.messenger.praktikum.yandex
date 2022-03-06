@@ -9,8 +9,6 @@ import auth from "../../controllers/auth";
 
 export default class Auth extends Block {
   constructor(props: Props = {}) {
-    console.log(document.cookie);
-    
     const form = new Form({
       formInputs: authForm,
       formButtons: [

@@ -9,17 +9,39 @@ enum METHODS {
 }
 
 export default class HTTPTransport {
+  private baseUrl: string = "https://ya-praktikum.tech/api/v2";
+
+  public setBaseUrl = (url: string) => {
+    this.baseUrl = url;
+  };
+
   public get = (url: string, options: Options) =>
-    this.request(url, { ...options, ...{method: METHODS.GET }}, options.timeout);
+    this.request(
+      url,
+      { ...options, ...{ method: METHODS.GET } },
+      options.timeout
+    );
 
   public post = (url: string, options: Options) =>
-    this.request(url, { ...options, ...{method: METHODS.POST} }, options.timeout);
+    this.request(
+      url,
+      { ...options, ...{ method: METHODS.POST } },
+      options.timeout
+    );
 
   public put = (url: string, options: Options) =>
-    this.request(url, { ...options, ...{method: METHODS.PUT} }, options.timeout);
+    this.request(
+      url,
+      { ...options, ...{ method: METHODS.PUT } },
+      options.timeout
+    );
 
   public delete = (url: string, options: Options) =>
-    this.request(url, { ...options, ...{method: METHODS.DELETE} }, options.timeout);
+    this.request(
+      url,
+      { ...options, ...{ method: METHODS.DELETE } },
+      options.timeout
+    );
 
   // eslint-disable-next-line class-methods-use-this
   private queryStringify = (data: Record<string, any>) => {
@@ -37,7 +59,15 @@ export default class HTTPTransport {
   };
 
   private request = (url: string, options: Props, timeout = 5000) => {
-    const { headers = {}, method, credentials, data, body } = options;
+    const {
+      headers = {
+        "content-type": "application/json",
+      },
+      method,
+      credentials = true,
+      data,
+      body,
+    } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -45,7 +75,9 @@ export default class HTTPTransport {
 
       xhr.open(
         method,
-        isGet && data ? `${url}${this.queryStringify(data)}` : url
+        isGet && data
+          ? `${this.baseUrl}${url}${this.queryStringify(data)}`
+          : this.baseUrl + url
       );
 
       Object.keys(headers).forEach((key) => {

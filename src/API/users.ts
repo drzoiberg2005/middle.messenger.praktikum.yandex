@@ -1,62 +1,46 @@
 import { BodyRequest, Options } from "src/layout/block/types";
-import MainApi from "./main";
+import HTTPTransport from "../utils/HTTPTransport";
 
-export default class UserApi extends MainApi {
+export default class UserApi {
+  private http = new HTTPTransport();
 
   public changeUserProfile(data: BodyRequest) {
     const options: Options = {
-      credentials: true,
-      headers: {
-        "content-type": "application/json",
-      },
       body: data,
     };
 
-    return this.http.put(`${this.baseUrl}/user/profile`, options);
+    return this.http.put("/user/profile", options);
   }
 
   public changeUserAvatar(data: FormData) {
     const options: Options = {
-      credentials: true,
       data,
     };
 
-    return this.http.put(`${this.baseUrl}/user/profile/avatar`, options);
+    return this.http.put("/user/profile/avatar", options);
   }
 
   public changeUserPassword(data: BodyRequest) {
     const options: Options = {
-      credentials: true,
-      headers: {
-        "content-type": "application/json",
-      },
       body: data,
     };
 
-    return this.http.put(`${this.baseUrl}/user/password`, options);
+    return this.http.put("/user/password", options);
   }
 
   public getUserById(id: string) {
     const options: Options = {
-      credentials: true,
-      headers: {
-        "content-type": "application/json",
-      },
       data: { id },
     };
 
-    return this.http.get(`${this.baseUrl}/user/${id}`, options);
+    return this.http.get(`/user/${id}`, options);
   }
 
   public findUsers(data: BodyRequest) {
     const options: Options = {
-      credentials: true,
-      headers: {
-        "content-type": "application/json",
-      },
       body: data,
     };
 
-    return this.http.post(`${this.baseUrl}/user/search`, options);
+    return this.http.post("/user/search", options);
   }
 }
