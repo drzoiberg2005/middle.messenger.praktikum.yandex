@@ -45,7 +45,7 @@ export default class Chat extends Block {
         {
           label: "Добавить пользователя",
           className: "button",
-          type: "submit",
+          type: "submit"
         },
       ],
       events: {
@@ -73,6 +73,7 @@ export default class Chat extends Block {
         addUserModal.show();
       }
     };
+
 
     super("div", {
       ...props,

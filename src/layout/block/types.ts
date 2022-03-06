@@ -41,6 +41,7 @@ export type ButtonProps = {
   type?: string;
   label?: string;
   events?: Event;
+  disabled?: Boolean
 };
 
 export type FormProps = {

@@ -2,35 +2,32 @@ import { Props } from "src/layout/block/types";
 import addchat from "../../../static/icons/addchat.svg";
 import adduser from "../../../static/icons/user-circle.svg";
 import message from "../../../static/icons/message.svg";
-import templateDialog from "./components/list.tmpl";
 import templateMessage from "./components/messages.tmpl";
+import templateChat from "./components/list.tmpl";
 
 export const template = (props: Props) => {
-  const { chats, messages, user, currentChats, addChatModal, addUserModal } = props;
-
+  const {chats, messages, user, currentChats, addChatModal, addUserModal } = props;
+  
   const listChats = chats
     ? chats.map((
-      element: {
-            id: number;
-            title: string;
-            last_message: Props;
-            unread_count: number;
-            avatar: string;
-          }) => templateDialog(element)) .join("")
+      element: { 
+      content: string 
+    }) =>templateChat(element, currentChats?.id)).join("")
     : "";
+
   const listMessages = messages
     ? messages.map((
       element: { 
         content: string 
       }) =>templateMessage(element, user?.id)).join("")
     : "";
+    
   return `
               <div class="chat">
               ${addChatModal}
               ${addUserModal}
                   <div class="dialogs">
                       <div class="find">
-                      <input data-value="AddInput" class="shipment__input" />
                       <img id="addChatButton" class="icon" src=${addchat}>
                       <img id="addUserButton" class="icon" src=${adduser}>
                       </div>

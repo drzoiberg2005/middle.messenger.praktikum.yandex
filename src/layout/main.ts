@@ -6,6 +6,10 @@ import "./main.scss";
 import template from "./main.tmpl";
 import Profile from "../pages/profile";
 import Chat from "../pages/chat";
+import { isEmpty } from "../utils/helpers";
+import store, { StoreEvents } from "../constants/store";
+import chats from "../controllers/chats";
+import auth from "../controllers/auth";
 
 export default class Main extends Block {
   constructor(props: Props = {}) {
@@ -17,10 +21,10 @@ export default class Main extends Block {
     const selectComponent = () => {
       switch (props.page) {
         case "Чат":
-          return new Chat();
+          return new Chat(store.getState());
 
         case "Профиль":
-          return new Profile();
+          return new Profile(store.getState());
 
         default:
           break;
@@ -31,6 +35,14 @@ export default class Main extends Block {
     super("div", {
       ...props,
       ...{ header, sidebar, main },
+    });
+    if (isEmpty(store.getState())) {
+      auth.getUserInfo();
+      chats.getChats();
+    }
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
     });
   }
 

@@ -6,7 +6,6 @@
 import store from "../constants/store";
 import { Props } from "../layout/block/types";
 import Socket from "../utils/socket";
-import chats from "./chats";
 import users from "./users";
 
 class MessengerController {
@@ -37,33 +36,30 @@ class MessengerController {
       '[data-value="chats"]'
     ) as HTMLElement;
     if (chatTarget) {
-      if (chatTarget.dataset.value === "chats") {
-        const { id } = chatTarget.dataset;
-        let socket: Socket;
-        const sockets = store.getState().socket;
-        Object.entries(sockets).forEach(([key, value]) => {
-          if (key === id) {
-            socket = value as Socket;
-
-            socket.send({
-              content: "0",
-              type: "get old",
-            });
-          }
-        });
-        store.setState("currentChats", { id });
-      }
+      const { id } = chatTarget.dataset;
+      let socket: Socket;
+      const sockets = store.getState().socket;
+      Object.entries(sockets).forEach(([key, value]) => {
+        if (key === id) {
+          socket = value as Socket;
+          socket.send({
+            content: "0",
+            type: "get old",
+          });
+        }
+      });
+      store.setState("currentChats", { id });
     }
   }
 
   public messageListener() {
     const data = JSON.parse((event as MessageEvent).data);
-
     if (data.type === "message") {
       this.addMessage(data);
     }
 
     if (Array.isArray(data)) {
+      store.setState("messages", [])
       this.addMessages(data);
     }
   }

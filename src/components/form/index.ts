@@ -15,6 +15,7 @@ export default class Form extends Block {
         type: element.type,
         label: element.label,
         className: element.className,
+        disabled: element.disabled,
         events: element.events,
       }),
     }));
