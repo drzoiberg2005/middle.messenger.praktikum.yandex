@@ -1,6 +1,6 @@
 import HTTPTransport from "../utils/HTTPTransport";
 
-export default class Main {
+export default class MainApi {
   protected http;
 
   protected baseUrl: string;

@@ -51,7 +51,7 @@ abstract class Block {
   }
 
   public show() {
-    this.getElement().style.display = "block";
+    this.getElement().style.display = "flex";
   }
 
   public hide() {

@@ -1,11 +1,10 @@
 import { BodyRequest, Options } from "src/layout/block/types";
-import Main from "./main";
+import MainApi from "./main";
 
-export default class Auth extends Main {
+export default class AuthApi extends MainApi {
   
   public signUp(data: BodyRequest) {
     const options: Options = {
-      method: "POST",
       credentials: true,
       headers: {
         "content-type": "application/json",
@@ -17,7 +16,6 @@ export default class Auth extends Main {
 
   public signIn(data: BodyRequest) {
     const options: Options = {
-      method: "POST",
       credentials: true,
       headers: {
         "content-type": "application/json",
@@ -30,7 +28,6 @@ export default class Auth extends Main {
 
   public getUserInfo() {
     const options: Options = {
-      method: "GET",
       credentials: true,
     };
 
@@ -39,7 +36,6 @@ export default class Auth extends Main {
 
   public logout() {
     const options: Options = {
-      method: "POST",
       credentials: true,
       body: {},
     };

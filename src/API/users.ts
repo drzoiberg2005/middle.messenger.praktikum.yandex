@@ -1,11 +1,10 @@
 import { BodyRequest, Options } from "src/layout/block/types";
-import Main from "./main";
+import MainApi from "./main";
 
-export default class User extends Main {
+export default class UserApi extends MainApi {
 
   public changeUserProfile(data: BodyRequest) {
     const options: Options = {
-      method: "PUT",
       credentials: true,
       headers: {
         "content-type": "application/json",
@@ -18,7 +17,6 @@ export default class User extends Main {
 
   public changeUserAvatar(data: FormData) {
     const options: Options = {
-      method: "PUT",
       credentials: true,
       data,
     };
@@ -28,7 +26,6 @@ export default class User extends Main {
 
   public changeUserPassword(data: BodyRequest) {
     const options: Options = {
-      method: "PUT",
       credentials: true,
       headers: {
         "content-type": "application/json",
@@ -41,7 +38,6 @@ export default class User extends Main {
 
   public getUserById(id: string) {
     const options: Options = {
-      method: "GET",
       credentials: true,
       headers: {
         "content-type": "application/json",
@@ -54,7 +50,6 @@ export default class User extends Main {
 
   public findUsers(data: BodyRequest) {
     const options: Options = {
-      method: "POST",
       credentials: true,
       headers: {
         "content-type": "application/json",

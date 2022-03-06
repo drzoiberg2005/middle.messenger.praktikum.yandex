@@ -11,7 +11,8 @@ import users from "./users";
 
 class MessengerController {
   public pageClick(e: Event): void {
-    if ((e.target as HTMLElement).dataset.value === "messageForm") {
+    const { value } = (e.target as HTMLElement).dataset;
+    if (value === "messageForm") {
       e.preventDefault();
       const { id } = store.getState().currentChats;
       const sockets = store.getState().socket;
@@ -32,7 +33,7 @@ class MessengerController {
       input.value = "";
     }
 
-    if ((e.target as HTMLElement).dataset.value === "AddChatForm") {
+    if (value === "AddChatForm") {
       const input = document.querySelector(
         '[data-value="AddInput"]'
       ) as HTMLInputElement;
@@ -42,7 +43,7 @@ class MessengerController {
       input.value = "";
     }
 
-    if ((e.target as HTMLElement).dataset.value === "AddUserForm") {
+    if (value === "AddUserForm") {
       const input = document.querySelector(
         '[data-value="AddInput"]'
       ) as HTMLInputElement;
@@ -54,25 +55,15 @@ class MessengerController {
       }
     }
 
-    if (
-      (e.target as HTMLElement).closest('[data-value="chats"]') as HTMLElement
-    ) {
-      if (
-        (
-          (e.target as HTMLElement).closest(
-            '[data-value="chats"]'
-          ) as HTMLElement
-        ).dataset.value === "chats"
-      ) {
-        const { id } = (
-          (e.target as HTMLElement).closest(
-            '[data-value="chats"]'
-          ) as HTMLElement
-        ).dataset;
-
-        (e.target as HTMLElement)
-          .closest('[data-value="chats"]')
-          ?.classList.add("__active");
+    const chatTarget = (e.target as HTMLElement).closest(
+      '[data-value="chats"]'
+    ) as HTMLElement;
+    if (chatTarget) {
+      if (chatTarget.dataset.value === "chats") {
+        const { id } = chatTarget.dataset;
+        console.log(chatTarget.classList.value, id);
+        
+        chatTarget.classList.add("__active");
 
         let socket: Socket;
         const sockets = store.getState().socket;

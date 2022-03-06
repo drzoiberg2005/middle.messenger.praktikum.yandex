@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Options } from "src/layout/block/types";
+import { Options, Props } from "src/layout/block/types";
 
 enum METHODS {
   GET = "GET",
@@ -10,16 +10,16 @@ enum METHODS {
 
 export default class HTTPTransport {
   public get = (url: string, options: Options) =>
-    this.request(url, { ...options, method: METHODS.GET }, options.timeout);
+    this.request(url, { ...options, ...{method: METHODS.GET }}, options.timeout);
 
   public post = (url: string, options: Options) =>
-    this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+    this.request(url, { ...options, ...{method: METHODS.POST} }, options.timeout);
 
   public put = (url: string, options: Options) =>
-    this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+    this.request(url, { ...options, ...{method: METHODS.PUT} }, options.timeout);
 
   public delete = (url: string, options: Options) =>
-    this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+    this.request(url, { ...options, ...{method: METHODS.DELETE} }, options.timeout);
 
   // eslint-disable-next-line class-methods-use-this
   private queryStringify = (data: Record<string, any>) => {
@@ -36,7 +36,7 @@ export default class HTTPTransport {
     );
   };
 
-  private request = (url: string, options: Options, timeout = 5000) => {
+  private request = (url: string, options: Props, timeout = 5000) => {
     const { headers = {}, method, credentials, data, body } = options;
 
     return new Promise((resolve, reject) => {

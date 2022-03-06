@@ -1,16 +1,14 @@
-import users from "../controllers/users";
-import auth from "../controllers/auth";
 import { Verify, FormData } from "../layout/block/types";
 import router from "./router";
 import Validation from "./validation";
 
-const inputFocus = (event: Event): void => {
-  const input = event.target as HTMLInputElement;
+const inputFocus = (e: Event): void => {
+  const input = e.target as HTMLInputElement;
   input.classList.remove("__error");
 };
 
-const inputBlur = (event: Event): void => {
-  const input = event.target as HTMLInputElement;
+const inputBlur = (e: Event): void => {
+  const input = e.target as HTMLInputElement;
   const verifyResult = Validation.verify(input.name, input.value);
   toggleErrorElement(input, verifyResult);
 };
@@ -37,7 +35,7 @@ const toggleErrorElement = (
 ): void => {
   if (!verifyResult.verify) {
     input.classList.add("__error");
-    const form = input.parentNode?.parentNode?.parentNode
+    const form = input.parentNode?.parentNode?.parentNode;
     const warning = form?.querySelector(
       ".form__warning-message"
     ) as HTMLElement;
@@ -45,44 +43,6 @@ const toggleErrorElement = (
       warning.innerText = verifyResult.message;
     }
   }
-};
-
-const signIn = (e: Event) => {
-  e.preventDefault();
-  const data = formCheck(e);
-  if (data) {
-    auth.signIn(data);
-  }
-};
-
-const signUp = (e: Event) => {
-  e.preventDefault();
-  const data = formCheck(e);
-  if (data) {
-    auth.signUp(data);
-  }
-};
-
-const changeUserData = (e: Event) => {
-  e.preventDefault();
-  const data = formCheck(e);
-  if (data) {
-    users.changeUserProfile(data);
-  }
-};
-
-const changePassword = (e: Event) => {
-  e.preventDefault();
-  const data = formCheck(e);
-  if (data) {
-    users.changeUserPassword(data);
-  }
-};
-
-const logOut = (e: Event) => {
-  e.preventDefault();
-  auth.logout();
-  router.go("/");
 };
 
 const goProfile = (e: Event): void => {
@@ -95,13 +55,4 @@ const goProfile = (e: Event): void => {
   }
 };
 
-export {
-  inputFocus,
-  inputBlur,
-  signIn,
-  signUp,
-  logOut,
-  goProfile,
-  changeUserData,
-  changePassword,
-};
+export { inputFocus, inputBlur, goProfile, formCheck };

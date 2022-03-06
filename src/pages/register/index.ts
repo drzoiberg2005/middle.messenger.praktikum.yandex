@@ -1,10 +1,11 @@
-import { signUp } from "../../utils/events";
+import { formCheck } from "../../utils/events";
 import router from "../../utils/router";
 import Block from "../../layout/block/index";
 import { Props } from "../../layout/block/types";
 import Form from "../../components/form";
 import { registerForm } from "../../constants/inputs";
 import { template } from "./register.tmpl";
+import auth from "../../controllers/auth";
 
 export default class Register extends Block {
   constructor(props: Props = {}) {
@@ -29,7 +30,13 @@ export default class Register extends Block {
         },
       ],
       events: {
-        submit: signUp,
+        submit: (e: Event) => {
+          e.preventDefault();
+          const data = formCheck(e);
+          if (data) {
+            auth.signUp(data);
+          }
+        },
       },
     });
 

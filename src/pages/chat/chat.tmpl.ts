@@ -29,8 +29,8 @@ export const template = (props: Props) => {
                   <div class="dialogs">
                       <div class="find">
                       <input data-value="AddInput" class="shipment__input" />
-                      <img data-value="AddChatForm" class="icon" src=${addchat}$>
-                      <img data-value="AddUserForm" class="icon" src=${adduser}$>
+                      <img data-value="AddChatForm" class="icon" src=${addchat}>
+                      <img data-value="AddUserForm" class="icon" src=${adduser}>
                       </div>
                       <ul class="list">
                         ${listChats}
@@ -42,7 +42,7 @@ export const template = (props: Props) => {
                     </ul>
                     ${currentChats? `<div class="shipment">
                     <input data-value="messageInput" class="shipment__input" />
-                    <img data-value="messageForm" class="icon" src=${message}$>
+                    <img data-value="messageForm" class="icon" src=${message}>
                     </div>`: ""}
               </div>
                       `;

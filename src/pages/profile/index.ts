@@ -7,10 +7,12 @@ import Modal from "../../components/modal";
 import Form from "../../components/form";
 import { fileForm, infoForm, passwordForm } from "../../constants/inputs";
 import store, { StoreEvents } from "../../constants/store";
-import { changePassword, changeUserData, logOut } from "../../utils/events";
+import { formCheck } from "../../utils/events";
 import auth from "../../controllers/auth";
 import { isEmpty } from "../../utils/helpers";
 import chats from "../../controllers/chats";
+import router from "../../utils/router";
+import users from "../../controllers/users";
 
 export default class Profile extends Block {
   constructor(props: Props = {}) {
@@ -18,11 +20,37 @@ export default class Profile extends Block {
       throw new Error("Cannot be called directly");
     }
 
+    const hideOrShowInfo = (element: Form) => {
+      const infoBlock = document.querySelector(
+        ".profile__block"
+      ) as HTMLElement;
+      const avatarBlock = document.querySelector(
+        ".profile__block-avatar"
+      ) as HTMLElement;
+      if (infoBlock && avatarBlock) {
+        if (infoBlock.classList.contains("__hide") === false) {
+          btnChangePass.hide();
+          btnChangeData.hide();
+          element.show();
+        } else {
+          btnChangePass.show();
+          btnChangeData.show();
+          element.hide();
+        }
+        infoBlock.classList.toggle("__hide");
+        avatarBlock.classList.toggle("__hide");
+      }
+    };
+
     const btnLogout = new Button({
       className: "button __cancel",
       label: "Выйти из профиля",
       events: {
-        click: logOut,
+        click: (e: Event) => {
+          e.preventDefault();
+          auth.logout();
+          router.go("/");
+        },
       },
     });
 
@@ -32,15 +60,7 @@ export default class Profile extends Block {
       events: {
         click: (e: Event) => {
           e.preventDefault();
-          (
-            document.querySelector(".profile__block") as HTMLElement
-          ).style.display = "none";
-          (
-            document.querySelector(".profile__block-avatar") as HTMLElement
-          ).style.display = "none";
-          btnChangePass.hide();
-          btnChangeData.hide();
-          changeData.show();
+          hideOrShowInfo(changeData);
         },
       },
     });
@@ -51,15 +71,7 @@ export default class Profile extends Block {
       events: {
         click: (e: Event) => {
           e.preventDefault();
-          (
-            document.querySelector(".profile__block") as HTMLElement
-          ).style.display = "none";
-          (
-            document.querySelector(".profile__block-avatar") as HTMLElement
-          ).style.display = "none";
-          btnChangePass.hide();
-          btnChangeData.hide();
-          changePass.show();
+          hideOrShowInfo(changePass);
         },
       },
     });
@@ -79,21 +91,19 @@ export default class Profile extends Block {
           events: {
             click: (e: Event) => {
               e.preventDefault();
-              (
-                document.querySelector(".profile__block") as HTMLElement
-              ).style.display = "flex";
-              (
-                document.querySelector(".profile__block-avatar") as HTMLElement
-              ).style.display = "flex";
-              btnChangePass.show();
-              btnChangeData.show();
-              changeData.hide();
+              hideOrShowInfo(changeData);
             },
           },
         },
       ],
       events: {
-        submit: changeUserData
+        submit: (e: Event) => {
+          e.preventDefault();
+          const data = formCheck(e);
+          if (data) {
+            users.changeUserProfile(e, data);
+          }
+        },
       },
     });
 
@@ -112,21 +122,19 @@ export default class Profile extends Block {
           events: {
             click: (e: Event) => {
               e.preventDefault();
-              (
-                document.querySelector(".profile__block") as HTMLElement
-              ).style.display = "flex";
-              (
-                document.querySelector(".profile__block-avatar") as HTMLElement
-              ).style.display = "flex";
-              btnChangeData.show();
-              btnChangePass.show();
-              changePass.hide();
+              hideOrShowInfo(changePass);
             },
           },
         },
       ],
       events: {
-        submit: changePassword
+        submit: (e: Event) => {
+          e.preventDefault();
+          const data = formCheck(e);
+          if (data) {
+            users.changeUserPassword(e, data);
+          }
+        },
       },
     });
 
@@ -156,7 +164,7 @@ export default class Profile extends Block {
       }
     };
 
-    const modal = new Modal({ form: formModal });
+    const modal = new Modal({ form: formModal, label: "Выбрать аватар" });
     super("div", {
       ...props,
       ...store.getState(),

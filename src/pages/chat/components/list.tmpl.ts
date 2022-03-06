@@ -8,9 +8,6 @@ const template = (props: {
   unread_count: number;
   avatar: string;
 }) =>
-  // const str = props.last_message ? props.last_message.time : "";
-  // const time = str.split("T")[1].split(":");
-  // console.log(`${time[0]}:${time[1]}`)
   `
         <li data-value="chats" data-id=${props.id} class="list__item">
             <div class="list__item-left-avatar ">

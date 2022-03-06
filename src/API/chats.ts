@@ -1,11 +1,10 @@
 import { BodyRequest, Options } from "src/layout/block/types";
-import Main from "./main";
+import MainApi from "./main";
 
-export default class Chats extends Main {
+export default class ChatsApi extends MainApi {
 
   public getChats(data: BodyRequest) {
     const options: Options = {
-      method: "GET",
       credentials: true,
       headers: {
         "content-type": "application/json",
@@ -18,7 +17,6 @@ export default class Chats extends Main {
 
   public createChat(data: BodyRequest) {
     const options: Options = {
-      method: "POST",
       credentials: true,
       headers: {
         "content-type": "application/json",
@@ -31,7 +29,6 @@ export default class Chats extends Main {
 
   public addUserToChat(data: BodyRequest) {
     const options: Options = {
-      method: "PUT",
       credentials: true,
       headers: {
         "content-type": "application/json",
@@ -44,7 +41,6 @@ export default class Chats extends Main {
 
   public deleteUserFromChat(data: BodyRequest) {
     const options: Options = {
-      method: "DELETE",
       credentials: true,
       headers: {
         "content-type": "application/json",
@@ -57,7 +53,6 @@ export default class Chats extends Main {
 
   public getChatToken(id: string) {
     const options: Options = {
-      method: "POST",
       credentials: true,
       headers: {
         "content-type": "application/json",

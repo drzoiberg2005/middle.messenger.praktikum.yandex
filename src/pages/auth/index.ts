@@ -3,8 +3,9 @@ import Block from "../../layout/block/index";
 import { Props } from "../../layout/block/types";
 import Form from "../../components/form";
 import { authForm } from "../../constants/inputs";
-import { template } from "./register.tmpl";
-import { signIn } from "../../utils/events";
+import { template } from "./auth.tmpl";
+import { formCheck } from "../../utils/events";
+import auth from "../../controllers/auth";
 
 export default class Auth extends Block {
   constructor(props: Props = {}) {
@@ -28,7 +29,13 @@ export default class Auth extends Block {
         },
       ],
       events: {
-        submit: signIn,
+        submit: (e: Event) => {
+          e.preventDefault();
+          const data = formCheck(e);
+          if (data) {
+            auth.signIn(data);
+          }
+        },
       },
     });
 

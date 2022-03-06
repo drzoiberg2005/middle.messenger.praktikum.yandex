@@ -9,7 +9,7 @@ export type Listeners = Record<string, Function[]>;
 export type InnerChildren = Record<string, Block>[];
 
 export type Options = {
-  method: string;
+  method?: string;
   timeout?: number;
   credentials?: boolean;
   mode?: string;

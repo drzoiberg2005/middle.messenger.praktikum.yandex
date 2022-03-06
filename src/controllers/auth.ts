@@ -1,14 +1,15 @@
-import Auth from "../API/auth";
+
+import AuthApi from "../API/auth";
 import store from "../constants/store";
 import { BodyRequest } from "../layout/block/types";
 import router from "../utils/router";
 import chats from "./chats";
 
 class AuthController {
-  private authAPIInstance: Auth;
+  private authAPIInstance: AuthApi;
 
   public constructor() {
-    this.authAPIInstance = new Auth();
+    this.authAPIInstance = new AuthApi();
   }
 
   public signUp(data: BodyRequest) {
@@ -25,7 +26,7 @@ class AuthController {
           throw new Error(xhr?.response?.reason);
         }
       })
-      .catch((error: { message: any }) => {
+      .catch((error: { message: string }) => {
         throw new Error(error.message);
       });
   }
@@ -61,7 +62,7 @@ class AuthController {
           store.setState("user", xhr.response);
         }
       })
-      .catch((error: { message: any }) => {
+      .catch((error: { message: string }) => {
         throw new Error(error.message);
       });
   }
@@ -72,7 +73,7 @@ class AuthController {
       .then(() => {
         router.go("/");
       })
-      .catch((error: { message: any }) => {
+      .catch((error: { message: string }) => {
         throw new Error(error.message);
       });
   }

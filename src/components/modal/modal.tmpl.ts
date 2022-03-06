@@ -10,7 +10,7 @@ export default function template(props: {
   return `
     <div id="${props.id}" class="modal__main">
       <div class="modal__block">
-      <h3>${props.label ? props.label : ""}</h3>
+      <span class="modal__label">${props.label ? props.label : ""}</span>
         ${props.form}
         ${props.closeBtn}
       </div>
