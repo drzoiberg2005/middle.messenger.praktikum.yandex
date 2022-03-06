@@ -149,7 +149,8 @@
     justify-content: flex-start;
     overflow-y: auto;
     box-sizing: border-box;
-    list-style: none
+    list-style: none;
+    -webkit-overflow-scrolling: touch
 }
 
 .messages__item {
