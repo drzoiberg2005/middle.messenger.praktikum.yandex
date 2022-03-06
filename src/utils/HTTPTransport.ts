@@ -16,32 +16,16 @@ export default class HTTPTransport {
   };
 
   public get = (url: string, options: Options) =>
-    this.request(
-      url,
-      { ...options, ...{ method: METHODS.GET } },
-      options.timeout
-    );
+    this.request(url, { ...options, method: METHODS.GET }, options.timeout);
 
   public post = (url: string, options: Options) =>
-    this.request(
-      url,
-      { ...options, ...{ method: METHODS.POST } },
-      options.timeout
-    );
+    this.request(url, { ...options, method: METHODS.POST }, options.timeout);
 
   public put = (url: string, options: Options) =>
-    this.request(
-      url,
-      { ...options, ...{ method: METHODS.PUT } },
-      options.timeout
-    );
+    this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
 
   public delete = (url: string, options: Options) =>
-    this.request(
-      url,
-      { ...options, ...{ method: METHODS.DELETE } },
-      options.timeout
-    );
+    this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
   // eslint-disable-next-line class-methods-use-this
   private queryStringify = (data: Record<string, any>) => {

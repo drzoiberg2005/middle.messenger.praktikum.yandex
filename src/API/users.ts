@@ -15,6 +15,7 @@ export default class UserApi {
   public changeUserAvatar(data: FormData) {
     const options: Options = {
       data,
+      headers: {},
     };
 
     return this.http.put("/user/profile/avatar", options);
