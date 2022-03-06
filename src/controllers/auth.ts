@@ -1,4 +1,3 @@
-
 import AuthApi from "../API/auth";
 import store from "../constants/store";
 import { BodyRequest } from "../layout/block/types";
@@ -39,6 +38,12 @@ class AuthController {
           this.getUserInfo();
           chats.getChats();
           router.go("/messenger");
+        } else if (
+          xhr.status === 400 &&
+          xhr.response.reason === "User already in system"
+        ) {
+          this.logout();
+          this.signIn(data);
         } else {
           const warning = document.querySelector(".form__warning-message");
           if (warning) {

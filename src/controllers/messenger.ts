@@ -61,8 +61,7 @@ class MessengerController {
     if (chatTarget) {
       if (chatTarget.dataset.value === "chats") {
         const { id } = chatTarget.dataset;
-        console.log(chatTarget.classList.value, id);
-        
+
         chatTarget.classList.add("__active");
 
         let socket: Socket;
