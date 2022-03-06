@@ -39,9 +39,6 @@ class MessengerController {
     if (chatTarget) {
       if (chatTarget.dataset.value === "chats") {
         const { id } = chatTarget.dataset;
-
-        chatTarget.classList.add("__active");
-
         let socket: Socket;
         const sockets = store.getState().socket;
         Object.entries(sockets).forEach(([key, value]) => {

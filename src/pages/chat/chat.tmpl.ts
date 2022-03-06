@@ -43,7 +43,7 @@ export const template = (props: Props) => {
                     ${listMessages}
                     </ul>
                     ${currentChats? `<div class="shipment">
-                    <input data-value="messageInput" class="shipment__input" />
+                    <textarea data-value="messageInput" class="shipment__input"></textarea>
                     <img data-value="messageForm" class="icon" src=${message}>
                     </div>`: ""}
               </div>
