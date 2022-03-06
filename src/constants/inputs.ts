@@ -1,6 +1,22 @@
 import users from "../controllers/users";
 import { Event, Props } from "../layout/block/types";
 
+export const addChatForm = [
+  {
+    label: "Название чата",
+    name: "chat-name",
+    type: "text",
+  },
+];
+
+export const addUserForm = [
+  {
+    label: "Логин пользователя",
+    name: "user-login",
+    type: "text",
+  },
+];
+
 export const authForm = [
   {
     label: "Логин",

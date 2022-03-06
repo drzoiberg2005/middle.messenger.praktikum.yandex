@@ -33,28 +33,6 @@ class MessengerController {
       input.value = "";
     }
 
-    if (value === "AddChatForm") {
-      const input = document.querySelector(
-        '[data-value="AddInput"]'
-      ) as HTMLInputElement;
-      chats.createChat({
-        title: input.value,
-      });
-      input.value = "";
-    }
-
-    if (value === "AddUserForm") {
-      const input = document.querySelector(
-        '[data-value="AddInput"]'
-      ) as HTMLInputElement;
-      if (input.value && store.getState().currentChats) {
-        chats.addUserToChat({
-          login: input.value,
-        });
-        input.value = "";
-      }
-    }
-
     const chatTarget = (e.target as HTMLElement).closest(
       '[data-value="chats"]'
     ) as HTMLElement;

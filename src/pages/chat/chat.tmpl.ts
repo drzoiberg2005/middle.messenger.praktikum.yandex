@@ -6,7 +6,7 @@ import templateDialog from "./components/list.tmpl";
 import templateMessage from "./components/messages.tmpl";
 
 export const template = (props: Props) => {
-  const { chats, messages, user, currentChats } = props;
+  const { chats, messages, user, currentChats, addChatModal, addUserModal } = props;
 
   const listChats = chats
     ? chats.map((
@@ -26,11 +26,13 @@ export const template = (props: Props) => {
     : "";
   return `
               <div class="chat">
+              ${addChatModal}
+              ${addUserModal}
                   <div class="dialogs">
                       <div class="find">
                       <input data-value="AddInput" class="shipment__input" />
-                      <img data-value="AddChatForm" class="icon" src=${addchat}>
-                      <img data-value="AddUserForm" class="icon" src=${adduser}>
+                      <img id="addChatButton" class="icon" src=${addchat}>
+                      <img id="addUserButton" class="icon" src=${adduser}>
                       </div>
                       <ul class="list">
                         ${listChats}
