@@ -1,19 +1,19 @@
 import { Verify, FormData } from "../layout/block/types";
+import router from "./router";
 import Validation from "./validation";
 
-const inputFocus = (event: Event): void => {
-  const input = event.target as HTMLInputElement;
+const inputFocus = (e: Event): void => {
+  const input = e.target as HTMLInputElement;
   input.classList.remove("__error");
 };
 
-const inputBlur = (event: Event): void => {
-  const input = event.target as HTMLInputElement;
+const inputBlur = (e: Event): void => {
+  const input = e.target as HTMLInputElement;
   const verifyResult = Validation.verify(input.name, input.value);
   toggleErrorElement(input, verifyResult);
 };
 
-const formSubmit = (e: Event): void => {
-  e.preventDefault();
+const formCheck = (e: Event) => {
   const data: FormData = {};
   const target = e.currentTarget;
   const inputFields = (target as HTMLElement).querySelectorAll("input");
@@ -24,9 +24,9 @@ const formSubmit = (e: Event): void => {
     data[input.name] = input.value;
   });
   if (validationError.length === 0) {
-    // eslint-disable-next-line no-console
-    console.log("Данные формы", data);
+    return data;
   }
+  return null;
 };
 
 const toggleErrorElement = (
@@ -35,7 +35,8 @@ const toggleErrorElement = (
 ): void => {
   if (!verifyResult.verify) {
     input.classList.add("__error");
-    const warning = document.body.querySelector(
+    const form = input.parentNode?.parentNode?.parentNode;
+    const warning = form?.querySelector(
       ".form__warning-message"
     ) as HTMLElement;
     if (warning) {
@@ -43,4 +44,15 @@ const toggleErrorElement = (
     }
   }
 };
-export { inputFocus, inputBlur, formSubmit };
+
+const goProfile = (e: Event): void => {
+  if (
+    // eslint-disable-next-line no-constant-condition
+    (e.target as HTMLElement).className === "header__user-name" ||
+    "header__user-avatar"
+  ) {
+    router.go("/settings");
+  }
+};
+
+export { inputFocus, inputBlur, goProfile, formCheck };

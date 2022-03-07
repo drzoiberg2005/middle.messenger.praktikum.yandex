@@ -25,6 +25,10 @@
     font-size: 1.6rem;
     color: $accent2;
     font-weight: 400;
+
+    &.__success {
+        color: $accent3;
+    }
 }
 
 .form__block__hide {

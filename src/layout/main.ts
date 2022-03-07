@@ -3,10 +3,13 @@ import { Props } from "./block/types";
 import Header from "../components/header";
 import Sidebar from "../components/sidebar";
 import "./main.scss";
-import Modal from "../components/modal";
 import template from "./main.tmpl";
 import Profile from "../pages/profile";
 import Chat from "../pages/chat";
+import { isEmpty } from "../utils/helpers";
+import store, { StoreEvents } from "../constants/store";
+import chats from "../controllers/chats";
+import auth from "../controllers/auth";
 
 export default class Main extends Block {
   constructor(props: Props = {}) {
@@ -14,23 +17,33 @@ export default class Main extends Block {
 
     const sidebar = new Sidebar(props);
 
-    const modal = new Modal({ id: props.id, classname: props.className, form: props.modalForm });
-
     // eslint-disable-next-line consistent-return
     const selectComponent = () => {
       switch (props.page) {
         case "Чат":
-          return new Chat(props);
+          return new Chat(store.getState());
 
         case "Профиль":
-          return new Profile(props);
+          return new Profile(store.getState());
 
         default:
           break;
       }
     };
     const main = selectComponent();
-    super("div", { id: props.id, classname: props.className, header, sidebar, modal, main });
+
+    super("div", {
+      ...props,
+      ...{ header, sidebar, main },
+    });
+    if (isEmpty(store.getState())) {
+      auth.getUserInfo();
+      chats.getChats();
+    }
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+    });
   }
 
   render() {

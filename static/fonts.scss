@@ -1,9 +1,9 @@
 @font-face {
 
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
 
     src: local('Montserrat'),
-        url('./Montserrat/montserratlight.woff2'),
+        url('./Montserrat/montserratlight.woff2')
         format("woff2");
 
     font-weight: 300;
@@ -14,10 +14,10 @@
 
 @font-face {
 
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
 
     src: local('Montserrat'),
-        url('./Montserrat/montserrat.woff2'),
+        url('./Montserrat/montserrat.woff2')
         format("woff2");
 
     font-weight: 600;
@@ -28,10 +28,10 @@
 
 @font-face {
 
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
 
     src: local('Montserrat'),
-        url('./Montserrat/montserratbold.woff2'),
+        url('./Montserrat/montserratbold.woff2')
         format("woff2");
 
     font-weight: bold;

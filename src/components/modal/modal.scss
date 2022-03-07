@@ -14,7 +14,7 @@
 .modal__block {
     background-color: $light2;
     padding: 2rem 0;
-    margin: 15% auto;
+    margin: auto;
     border: 1px solid $border-color;
     border-radius: 1rem;
     width: 40rem;
@@ -22,4 +22,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.modal__label {
+    font-size: 1.8rem;
 }

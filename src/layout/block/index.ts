@@ -39,7 +39,6 @@ abstract class Block {
 
   public setProps(newProps: Props): void {
     if (!newProps) return;
-
     Object.assign(this.props, newProps);
   }
 
@@ -52,7 +51,7 @@ abstract class Block {
   }
 
   public show() {
-    this.getElement().style.display = "block";
+    this.getElement().style.display = "flex";
   }
 
   public hide() {
@@ -93,10 +92,8 @@ abstract class Block {
   private renderComponent(): void {
     const fragment = this.render();
     const element = fragment.firstElementChild as HTMLElement;
-
     this.element.replaceWith(element);
     this.element = element;
-
     this.addEvents();
   }
 
@@ -108,7 +105,6 @@ abstract class Block {
         const oldProps = target[prop];
         // eslint-disable-next-line no-param-reassign
         target[prop] = value;
-
         this.eventBus.emit(this.EVENTS.FLOW_CDU, oldProps, target[prop]);
         return true;
       },
@@ -179,14 +175,13 @@ abstract class Block {
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (
         value instanceof Block ||
-        (Array.isArray(value) && Object.values(value[0])[0] instanceof Block)
+        (Array.isArray(value) && Object.values(value[0] ? value[0] : {} )[0] instanceof Block)
       ) {
         children[key] = value;
       } else {
         props[key] = value;
       }
     });
-
     return { children, props };
   }
 

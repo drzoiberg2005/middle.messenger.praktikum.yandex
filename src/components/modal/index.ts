@@ -9,13 +9,14 @@ export default class Modal extends Block {
     const closeBtn = new Button({
       label: "Закрыть",
       className: "button __cancel",
+      name: "closeModal",
       events: {
         click: () => {
           this.hide();
         },
       },
     });
-    super("div", { id: props.id, form: props.form, closeBtn });
+    super("div", { ...props, ...{ closeBtn } });
   }
 
   render() {

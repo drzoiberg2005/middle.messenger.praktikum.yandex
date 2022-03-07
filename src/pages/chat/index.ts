@@ -2,62 +2,100 @@ import Block from "../../layout/block/index";
 import { Props } from "../../layout/block/types";
 import { template } from "./chat.tmpl";
 import "./chat.scss";
-import Button from "../../components/button";
-import templateDialog from "./components/list.tmpl";
-import templateMessage from "./components/messages.tmpl";
-import { chats, messages } from "../../../static/consts";
-import { formSubmit } from "../../utils/events";
-import message from "../../../static/icons/message.svg";
-import { sendForm } from "../../constants/inputs";
+import store, { StoreEvents } from "../../constants/store";
+import { isEmpty } from "../../utils/helpers";
+import auth from "../../controllers/auth";
+import chats from "../../controllers/chats";
+import messenger from "../../controllers/messenger";
+import Modal from "../../components/modal";
+import { addChatForm, addUserForm } from "../../constants/inputs";
 import Form from "../../components/form";
 
 export default class Chat extends Block {
   constructor(props: Props = {}) {
-    const dialogs = chats;
-    const currentDialog = messages;
+    if (isEmpty(store.getState())) {
+      auth.getUserInfo();
+      chats.getChats();
+    }
 
-    const listDialogs = dialogs.map(
-      (element: {
-        contact: string;
-        message: string;
-        time: string;
-        counter: string;
-      }) => ({
-        button: new Button({
-          className: "list__item",
-          label: templateDialog(element),
-          events: {
-            click: () => this.setProps({ className: "list__item __active" }),
-          },
-        }),
-      })
-    );
-
-    const listMessages = currentDialog.map(
-      (element: { message: string; in: boolean }) => ({
-        button: new Button({
-          label: templateMessage(element),
-          className: "none",
-        }),
-      })
-    );
-
-    const send = new Form({
-      formInputs: sendForm,
-      className:"shipment",
+    const addChatBlock = new Form({
+      formInputs: addChatForm,
       formButtons: [
         {
-          label: `<img src='${message}'/>`,
-          className: "icon",
+          label: "Добавить чат",
+          className: "button",
           type: "submit",
         },
       ],
       events: {
-        submit: formSubmit,
+        submit: (e: Event) => {
+          e.preventDefault();
+          const target = e.currentTarget;
+          const inputField = (target as HTMLElement).querySelector("input");
+          chats.createChat({
+            title: inputField?.value,
+          });
+        },
       },
     });
 
-    super("div", { id: props.id, classname: props.className, listDialogs, listMessages, send });
+    const addUserBlock = new Form({
+      formInputs: addUserForm,
+      formButtons: [
+        {
+          label: "Добавить пользователя",
+          className: "button",
+          type: "submit"
+        },
+      ],
+      events: {
+        submit: (e: Event) => {
+          e.preventDefault();
+          const target = e.currentTarget;
+          const inputField = (target as HTMLElement).querySelector("input");
+          chats.addUserToChat({
+            login: inputField?.value,
+          });
+        },
+      },
+    });
+
+    const addChatModal = new Modal({ form: addChatBlock, label: "Новый чат" });
+    const addUserModal = new Modal({
+      form: addUserBlock,
+      label: "Добавить пользователя в чат",
+    });
+
+    const modalOpen = (e: Event): void => {
+      if ((e.target as HTMLElement).id === "addChatButton") {
+        addChatModal.show();
+      } else if ((e.target as HTMLElement).id === "addUserButton") {
+        addUserModal.show();
+      }
+    };
+
+
+    super("div", {
+      ...props,
+      ...store.getState(),
+      ...{ addChatModal, addUserModal },
+      ...{
+        events: {
+          click: (e: Event) => {
+            modalOpen(e);
+            messenger.pageClick(e);
+          },
+        },
+      },
+    });
+    if (isEmpty(store.getState())) {
+      auth.getUserInfo();
+      chats.getChats();
+    }
+
+    store.on(StoreEvents.Updated, () => {
+      this.setProps(store.getState());
+    });
   }
 
   render() {

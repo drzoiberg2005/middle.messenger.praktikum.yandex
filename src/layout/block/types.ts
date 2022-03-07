@@ -9,7 +9,7 @@ export type Listeners = Record<string, Function[]>;
 export type InnerChildren = Record<string, Block>[];
 
 export type Options = {
-  method: string;
+  method?: string;
   timeout?: number;
   credentials?: boolean;
   mode?: string;
@@ -37,9 +37,11 @@ export type Event = { [k: string]: any};
 export type ButtonProps = {
   id?: string;
   className?: string;
+  name?: string;
   type?: string;
-  label: string;
+  label?: string;
   events?: Event;
+  disabled?: Boolean
 };
 
 export type FormProps = {
@@ -65,6 +67,7 @@ export type InputProps = {
 
 export type HeaderProps = {
   id?: string;
-  title: string;
-  button: ButtonProps;
+  page: string;
+  headerLabel: ButtonProps;
+  user?: Props
 };
