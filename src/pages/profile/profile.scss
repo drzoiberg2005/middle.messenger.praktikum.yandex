@@ -19,10 +19,15 @@
 
 
 .profile__block-avatar {
+    display: flex;
     margin-right: 3rem;
 
     @media only screen and (max-width: 1024px) {
         margin: 2rem 0;
+    }
+
+    &.__hide {
+        display: none;
     }
 }
 
@@ -32,6 +37,7 @@
     justify-content: center;
     padding: 0;
     margin: 0;
+    width: 350px;
 }
 
 .profile__block-title {
@@ -52,6 +58,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+    &.__hide {
+        display: none;
+    }
 }
 
 .profile__block-item-title {

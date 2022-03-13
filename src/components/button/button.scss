@@ -23,4 +23,8 @@
     &.__cancel {
         background: $button-backround-cancel;
     }
+
+    &.__disable {
+        background: #aaaaaa;
+    }
 }

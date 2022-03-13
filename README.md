@@ -1,3 +1,7 @@
+___
+## [Ссылка](https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/6 "https://github.com/drzoiberg2005/middle.messenger.praktikum.yandex/pull/6") на открытый PR спринт_3 
+
+
 # __МЕДИАТОР__
 
 ---
@@ -51,3 +55,17 @@ npm run build
 ```
 npm run delete
 ```
+
+#### Запуск анализатора кода
+
+```
+npm run eslint
+```
+=======
+
+#### Запуск теста
+
+```
+npm run test
+```
+=======
