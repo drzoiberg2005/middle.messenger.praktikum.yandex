@@ -29,7 +29,7 @@ export const template = (props: Props) => {
                   <div class="dialogs">
                       <div class="find">
                       <img id="addChatButton" class="icon" src=${addchat}>
-                      <img id="addUserButton" class="icon" src=${adduser}>
+                      ${currentChats? `<img id="addUserButton" class="icon" src=${adduser}>` : ""}
                       </div>
                       <ul class="list">
                         ${listChats}

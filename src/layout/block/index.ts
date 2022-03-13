@@ -213,6 +213,7 @@ abstract class Block {
         child.forEach((innerChild: Children) => {
           // eslint-disable-next-line no-unused-vars
           Object.entries(innerChild).forEach(([innerChildKey, child]) => {
+            console.log(innerChildKey)
             const stub = fragment.content.querySelector(
               `[data-id="${child.id}"]`
             );

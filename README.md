@@ -19,6 +19,9 @@ ___
 ####  Открыть опубликованный проект на [Netlify](https://mediator-chat.netlify.app/ "https://mediator-chat.netlify.app/")
 
 ___
+####  Открыть опубликованный проект на [Heroku](https://mediator-chat.herokuapp.com/ "https://mediator-chat.herokuapp.com/")
+
+___
 
 ####  Открыть прототип приложения в [Figma](https://www.figma.com/file/JE3kmIW3amunmzogk12O5i/MediatorChat "https://www.figma.com/file/JE3kmIW3amunmzogk12O5i/MediatorChat")
 
