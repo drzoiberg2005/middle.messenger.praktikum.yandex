@@ -4,16 +4,16 @@
   "description": "WEB-messenger",
   "scripts": {
     "eslint": "eslint ./ --ext=.jsx,.js,.tsx,.ts --fix",
-    "start": "npm-run-all build server",
+    "start": "npm run build && npm run server",
     "dev": "webpack --mode development",
-    "server": "nodemon app.js",
+    "server": "node app.js",
     "build": "webpack --mode production",
     "test": "./node_modules/.bin/mocha",
     "delete": "shx rm -R ./dist ./.parcel-cache"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run delete test eslint"
+      "pre-commit": "npm run delete && npm run test && npm run eslint"
     }
   },
   "repository": {
